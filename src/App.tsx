@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/navbar/Navbar';
 import Cart from './pages/cart/Cart';
@@ -10,6 +9,7 @@ import Blog from './pages/blog/Blog';
 import About from './pages/about/About';
 import NotFound from './pages/not-found/NotFound';
 import Category from './pages/category/Category';
+import Footer from './components/footer/Footer';
 
 const App = () => {
   return (
@@ -27,6 +27,7 @@ const App = () => {
           <Route path="/cart" element={<Cart />} />
           <Route path="/not-found" element={<NotFound />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </>
   );
