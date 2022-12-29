@@ -19,9 +19,9 @@ const CategorySection = () => {
         marginTop: '20px',
       }}
     >
-      <Box sx={{ fontWeight: '700', m: 1 }}>
+      <Box sx={{ m: 1 }}>
         <Typography variant="h6" sx={{ fontWeight: '700' }}>
-          CATEGORY
+          Categories
         </Typography>
       </Box>
       <Box sx={{ display: 'flex', flexDirection: 'row' }}>
