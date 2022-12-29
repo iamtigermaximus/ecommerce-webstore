@@ -5,7 +5,6 @@ import {
   CardMedia,
   CardContent,
   Typography,
-  CssBaseline,
 } from '@mui/material';
 
 const CategorySection = () => {
@@ -58,7 +57,7 @@ const CategorySection = () => {
                 fontWeight: 700,
               }}
             >
-              Category
+              Shoes
             </Typography>
           </CardContent>
         </Card>
@@ -76,7 +75,7 @@ const CategorySection = () => {
                 fontWeight: 700,
               }}
             >
-              Category
+              Furniture
             </Typography>
           </CardContent>
         </Card>
@@ -94,7 +93,7 @@ const CategorySection = () => {
                 fontWeight: 700,
               }}
             >
-              Category
+              Others
             </Typography>
           </CardContent>
         </Card>
