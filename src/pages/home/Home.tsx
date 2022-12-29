@@ -9,97 +9,13 @@ import {
   Typography,
 } from '@mui/material';
 import BannerSection from '../../components/sections/BannerSection';
+import CategorySection from '../../components/sections/CategorySection';
 
 const Home = () => {
   return (
     <>
       <BannerSection />
-      <Container
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          height: '400px',
-          width: '100vw',
-          marginTop: '20px',
-        }}
-      >
-        <Box sx={{ fontWeight: '700', m: 1 }}>SECTION TITLE - CATEGORIES</Box>
-        <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-          <Card sx={{ width: '800px', m: 1 }}>
-            <CardMedia
-              sx={{ height: 250, width: '100%' }}
-              image="https://img01.ztat.net/article/spp-media-p1/cfc43f5b35ca43e69e35bc6c89586550/86daded655134c0ba55d7cdcc2535bf2.jpg?imwidth=1800&filter=packshot"
-            />
-            <CardContent>
-              <Typography
-                variant="h6"
-                sx={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-              >
-                Category
-              </Typography>
-            </CardContent>
-          </Card>
-          <Card sx={{ width: '800px', m: 1 }}>
-            <CardMedia
-              sx={{ height: 250, width: '100%' }}
-              image="https://img01.ztat.net/article/spp-media-p1/cfc43f5b35ca43e69e35bc6c89586550/86daded655134c0ba55d7cdcc2535bf2.jpg?imwidth=1800&filter=packshot"
-            />
-            <CardContent>
-              <Typography
-                variant="h6"
-                sx={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-              >
-                Category
-              </Typography>
-            </CardContent>
-          </Card>
-          <Card sx={{ width: '800px', m: 1 }}>
-            <CardMedia
-              sx={{ height: 250, width: '100%' }}
-              image="https://img01.ztat.net/article/spp-media-p1/cfc43f5b35ca43e69e35bc6c89586550/86daded655134c0ba55d7cdcc2535bf2.jpg?imwidth=1800&filter=packshot"
-            />
-            <CardContent>
-              <Typography
-                variant="h6"
-                sx={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-              >
-                Category
-              </Typography>
-            </CardContent>
-          </Card>{' '}
-          <Card sx={{ width: '800px', m: 1 }}>
-            <CardMedia
-              sx={{ height: 250, width: '100%' }}
-              image="https://img01.ztat.net/article/spp-media-p1/cfc43f5b35ca43e69e35bc6c89586550/86daded655134c0ba55d7cdcc2535bf2.jpg?imwidth=1800&filter=packshot"
-            />
-            <CardContent>
-              <Typography
-                variant="h6"
-                sx={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-              >
-                Category
-              </Typography>
-            </CardContent>
-          </Card>
-        </Box>
-      </Container>
+      <CategorySection />
       <Container
         sx={{
           display: 'flex',
