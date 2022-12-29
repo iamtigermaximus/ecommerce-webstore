@@ -1,9 +1,35 @@
-import React from 'react'
+import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import Navbar from './components/navbar/Navbar';
+// import Cart from './pages/cart/Cart';
+// import Home from './pages/home/Home';
+// import Shop from './pages/shop/Shop';
+// import Product from './pages/product/Product';
+// import Profile from './pages/profile/Profile';
+// import Blog from './pages/blog/Blog';
+// import About from './pages/about/About';
+// import NotFound from './pages/not-found/NotFound';
+// import Category from './pages/category/Category';
 
 const App = () => {
   return (
-    <div>App</div>
-  )
-}
+    <>
+      <BrowserRouter>
+        <Navbar />
+        {/* <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/shop" element={<Shop />} />
+          <Route path="/category" element={<Category />} />
+          <Route path="/product" element={<Product />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/not-found" element={<NotFound />} />
+        </Routes> */}
+      </BrowserRouter>
+    </>
+  );
+};
 
-export default App
+export default App;
