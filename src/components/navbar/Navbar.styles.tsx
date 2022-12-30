@@ -2,7 +2,7 @@ import { AppBar, Toolbar } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
 
-export const Navbar1 = styled(AppBar)`
+export const NavigationBar = styled(AppBar)`
   background-color: black;
   padding: 10px 24px;
 `;

@@ -1,16 +1,9 @@
-import { Container, Box, Typography, CssBaseline } from '@mui/material';
+import { Box, Typography, CssBaseline } from '@mui/material';
+import { FooterContainer } from './Footer.styles';
 
 const Footer = () => {
   return (
-    <Container
-      sx={{
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'center',
-        my: 4,
-        bgcolor: 'rgb(243, 243, 243)',
-      }}
-    >
+    <FooterContainer maxWidth={false}>
       <Box sx={{ width: '400px', m: 1, p: 2 }}>
         <Typography
           variant="h6"
@@ -87,7 +80,7 @@ const Footer = () => {
         <Typography variant="body1">Twitter</Typography>
         <Typography variant="body1">Blog</Typography>
       </Box>
-    </Container>
+    </FooterContainer>
   );
 };
 

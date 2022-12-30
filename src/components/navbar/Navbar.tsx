@@ -12,7 +12,7 @@ import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
 import {
   MenuContainer,
-  Navbar1,
+  NavigationBar,
   MenuLink,
   BrandLink,
   CartLink,
@@ -55,105 +55,103 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const Navbar = () => {
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <Box>
-        <Navbar1 position="static">
-          <Toolbar>
-            <Box
-              sx={{
-                width: '150px',
-              }}
-            >
-              <Typography variant="h6" noWrap component="div">
-                <BrandLink to="/">eSHOP</BrandLink>
-              </Typography>
-            </Box>
-            <Box sx={{ flexGrow: 1 }} />
-            <Box>
-              <Search>
-                <SearchIconWrapper>
-                  <SearchIcon />
-                </SearchIconWrapper>
-                <StyledInputBase
-                  placeholder="Search…"
-                  inputProps={{ 'aria-label': 'search' }}
-                />
-              </Search>
-            </Box>
-
-            <Box sx={{ flexGrow: 1 }} />
-            <Box
-              sx={{
-                width: '150px',
-              }}
-            >
-              <IconButton
-                size="large"
-                aria-label="show 4 new mails"
-                color="inherit"
-              >
-                <Badge badgeContent={4} color="error">
-                  <CartLink to="/">
-                    <FavoriteBorderIcon />
-                  </CartLink>
-                </Badge>
-              </IconButton>
-              <IconButton
-                size="large"
-                aria-label="show 17 new notifications"
-                color="inherit"
-              >
-                <Badge badgeContent={17} color="error">
-                  <CartLink to="/cart">
-                    <ShoppingCartOutlinedIcon />
-                  </CartLink>
-                </Badge>
-              </IconButton>
-              <IconButton
-                size="large"
-                edge="end"
-                aria-label="account of current user"
-                aria-haspopup="true"
-                color="inherit"
-              >
-                <CartLink to="/">
-                  <AccountBoxOutlinedIcon />
-                </CartLink>
-              </IconButton>
-            </Box>
-          </Toolbar>
-        </Navbar1>
-        <MenuContainer>
-          <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-            <Box>
-              <Typography variant="h6" noWrap sx={{ m: 1 }}>
-                <MenuLink to="/">HOME</MenuLink>
-              </Typography>
-            </Box>
-            <Box>
-              <Typography variant="h6" noWrap sx={{ m: 1 }}>
-                <MenuLink to="/shop">SHOP</MenuLink>
-              </Typography>
-            </Box>
-            <Box>
-              <Typography variant="h6" noWrap sx={{ m: 1 }}>
-                <MenuLink to="/category">CATEGORY</MenuLink>
-              </Typography>
-            </Box>
-            <Box>
-              <Typography variant="h6" noWrap sx={{ m: 1 }}>
-                <MenuLink to="/blog">BLOG</MenuLink>
-              </Typography>
-            </Box>
-            <Box>
-              <Typography variant="h6" noWrap sx={{ m: 1 }}>
-                <MenuLink to="/about">ABOUT</MenuLink>
-              </Typography>
-            </Box>
+    <>
+      <NavigationBar position="static">
+        <Toolbar>
+          <Box
+            sx={{
+              width: '150px',
+            }}
+          >
+            <Typography variant="h6" noWrap component="div">
+              <BrandLink to="/">eSHOP</BrandLink>
+            </Typography>
           </Box>
-        </MenuContainer>
-      </Box>
-    </Box>
+          <Box sx={{ flexGrow: 1 }} />
+          <Box>
+            <Search>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="Search…"
+                inputProps={{ 'aria-label': 'search' }}
+              />
+            </Search>
+          </Box>
+
+          <Box sx={{ flexGrow: 1 }} />
+          <Box
+            sx={{
+              width: '150px',
+            }}
+          >
+            <IconButton
+              size="large"
+              aria-label="show 4 new mails"
+              color="inherit"
+            >
+              <Badge badgeContent={4} color="error">
+                <CartLink to="/">
+                  <FavoriteBorderIcon />
+                </CartLink>
+              </Badge>
+            </IconButton>
+            <IconButton
+              size="large"
+              aria-label="show 17 new notifications"
+              color="inherit"
+            >
+              <Badge badgeContent={17} color="error">
+                <CartLink to="/cart">
+                  <ShoppingCartOutlinedIcon />
+                </CartLink>
+              </Badge>
+            </IconButton>
+            <IconButton
+              size="large"
+              edge="end"
+              aria-label="account of current user"
+              aria-haspopup="true"
+              color="inherit"
+            >
+              <CartLink to="/">
+                <AccountBoxOutlinedIcon />
+              </CartLink>
+            </IconButton>
+          </Box>
+        </Toolbar>
+      </NavigationBar>
+      <MenuContainer>
+        <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+          <Box>
+            <Typography variant="h6" noWrap sx={{ m: 1 }}>
+              <MenuLink to="/">HOME</MenuLink>
+            </Typography>
+          </Box>
+          <Box>
+            <Typography variant="h6" noWrap sx={{ m: 1 }}>
+              <MenuLink to="/shop">SHOP</MenuLink>
+            </Typography>
+          </Box>
+          <Box>
+            <Typography variant="h6" noWrap sx={{ m: 1 }}>
+              <MenuLink to="/category">CATEGORY</MenuLink>
+            </Typography>
+          </Box>
+          <Box>
+            <Typography variant="h6" noWrap sx={{ m: 1 }}>
+              <MenuLink to="/blog">BLOG</MenuLink>
+            </Typography>
+          </Box>
+          <Box>
+            <Typography variant="h6" noWrap sx={{ m: 1 }}>
+              <MenuLink to="/about">ABOUT</MenuLink>
+            </Typography>
+          </Box>
+        </Box>
+      </MenuContainer>
+    </>
   );
 };
 export default Navbar;

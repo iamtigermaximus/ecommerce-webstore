@@ -18,14 +18,17 @@ const App = () => {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/shop" element={<Shop />} />
+          <Route path="/shop">
+            <Route path="" element={<Shop />} />
+            <Route path=":id" element={<Product />} />
+          </Route>
           <Route path="/category" element={<Category />} />
-          <Route path="/product" element={<Product />} />
+          {/* <Route path="/product" element={<Product />} /> */}
           <Route path="/blog" element={<Blog />} />
           <Route path="/about" element={<About />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/not-found" element={<NotFound />} />
+          <Route path="/*" element={<NotFound />} />
         </Routes>
         <Footer />
       </BrowserRouter>
