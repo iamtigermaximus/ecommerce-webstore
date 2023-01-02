@@ -1,20 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-
-export interface Category {
-  id: number;
-  name: string;
-  image: string;
-}
-
-export interface Product {
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  category: Category;
-  images: string[];
-}
+import { Product } from '../../types/product';
 
 const initialState: Product[] = [];
 export const fetchAllProducts = createAsyncThunk(
@@ -34,7 +20,20 @@ export const fetchAllProducts = createAsyncThunk(
 const productSlice = createSlice({
   name: 'product',
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    highestPriceFirst: (state) => {
+      state.sort((a, b) => (a.price > b.price ? -1 : 1));
+    },
+    lowestPriceFirst: (state) => {
+      state.sort((a, b) => (a.price < b.price ? -1 : 1));
+    },
+    alphabetical: (state) => {
+      state.sort((a, b) => (a.title > b.title ? -1 : 1));
+    },
+    alphabetical2: (state) => {
+      state.sort((a, b) => (a.title < b.title ? -1 : 1));
+    },
+  },
   extraReducers: (build) => {
     build.addCase(fetchAllProducts.fulfilled, (state, action) => {
       console.log('data is fetched');
@@ -57,4 +56,10 @@ const productSlice = createSlice({
 });
 
 const productReducer = productSlice.reducer;
+export const {
+  lowestPriceFirst,
+  highestPriceFirst,
+  alphabetical,
+  alphabetical2,
+} = productSlice.actions;
 export default productReducer;

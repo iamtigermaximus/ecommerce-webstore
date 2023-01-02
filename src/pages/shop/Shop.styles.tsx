@@ -26,8 +26,8 @@ export const PaginationContainer = styled(Box)`
   margin: 30px;
 `;
 export const ProdCard = styled(Card)`
-  width: 250px;
-  height: 350px;
+  width: 200px;
+  height: 300px;
   margin: 10px;
 `;
 

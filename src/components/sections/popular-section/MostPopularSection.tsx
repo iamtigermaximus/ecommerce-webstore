@@ -10,7 +10,7 @@ const MostPopularSection = () => {
   return (
     <SectionContainer maxWidth={false}>
       <SectionNameContainer>
-        <SectionName variant="h6">New Arrivals</SectionName>
+        <SectionName variant="h6">Most Popular</SectionName>
       </SectionNameContainer>
       <ProductCardsContainer>
         <ProductCard />

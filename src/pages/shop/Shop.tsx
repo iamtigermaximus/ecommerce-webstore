@@ -1,4 +1,4 @@
-import { Pagination, PaginationItem } from '@mui/material';
+import { Box, Pagination, PaginationItem } from '@mui/material';
 import {
   PageContainer,
   CardsWrapper,
@@ -16,6 +16,7 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { useAppSelector, useAppDispatch } from '../../hooks/reduxHook';
 import { useEffect } from 'react';
 import { fetchAllProducts } from '../../redux/reducers/productSlice';
+import DropdownOption from '../../components/dropdown-option/DropdownOption';
 
 const Shop = () => {
   const products = useAppSelector((state) => state.productReducer);
@@ -27,6 +28,17 @@ const Shop = () => {
   }, [dispatch]);
   return (
     <PageContainer>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'flex-end',
+          alignItems: 'center',
+          margin: '10px 20px',
+        }}
+      >
+        <DropdownOption />
+      </Box>
+
       <CardsWrapper>
         {products.map((product) => {
           return (
