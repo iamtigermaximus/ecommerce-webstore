@@ -33,12 +33,12 @@ export const ProductCardName = styled(Typography)`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 10px;
+  font-size: 11px;
 `;
 
 export const ProductCardPrice = styled(Typography)`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 10px;
+  font-size: 11px;
 `;

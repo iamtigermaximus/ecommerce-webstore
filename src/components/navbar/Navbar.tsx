@@ -17,6 +17,8 @@ import {
   BrandLink,
   CartLink,
 } from './Navbar.styles';
+import { RootState } from '../../redux/store';
+import { useSelector } from 'react-redux';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -54,6 +56,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const Navbar = () => {
+  const { amount } = useSelector((state: RootState) => state.cart);
   return (
     <>
       <NavigationBar position="static">
@@ -91,18 +94,14 @@ const Navbar = () => {
               aria-label="show 4 new mails"
               color="inherit"
             >
-              <Badge badgeContent={4} color="error">
+              <Badge badgeContent={1} color="error">
                 <CartLink to="/">
                   <FavoriteBorderIcon />
                 </CartLink>
               </Badge>
             </IconButton>
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-              <Badge badgeContent={17} color="error">
+            <IconButton size="large" color="inherit">
+              <Badge badgeContent={amount} color="error">
                 <CartLink to="/cart">
                   <ShoppingCartOutlinedIcon />
                 </CartLink>
