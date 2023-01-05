@@ -1,4 +1,4 @@
-import { Box, Typography, Button } from '@mui/material';
+import { Box, Typography, Button, Container } from '@mui/material';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import {
@@ -12,10 +12,19 @@ import {
   QuantityContainer,
 } from './Cart.styles';
 import { RootState } from '../../redux/store';
-import { useSelector } from 'react-redux';
+import { useAppSelector, useAppDispatch } from '../../hooks/reduxHook';
+import {
+  removeItem,
+  clearCart,
+  decrementQuantity,
+  addToCart,
+} from '../../redux/reducers/cartSlice';
 
 const Cart = () => {
-  const { total, amount } = useSelector((state: RootState) => state.cart);
+  const dispatch = useAppDispatch();
+  const { cartItems, cartTotal } = useAppSelector(
+    (state: RootState) => state.cartReducer
+  );
 
   return (
     <PageContainer>
@@ -24,7 +33,7 @@ const Cart = () => {
       >
         <Typography variant="h4">YOUR BAG</Typography>
       </Box>
-      {amount < 1 ? (
+      {cartItems.length === 0 ? (
         <Box
           sx={{
             width: '100%',
@@ -36,110 +45,80 @@ const Cart = () => {
           <Typography variant="h6">is currently empty!</Typography>
         </Box>
       ) : (
-        <>
-          <CartItemContainer>
-            <CartItem>
-              <CartItemDetails>
-                <CartImage image="https://img01.ztat.net/article/spp-media-p1/cfc43f5b35ca43e69e35bc6c89586550/86daded655134c0ba55d7cdcc2535bf2.jpg?imwidth=1800&filter=packshot" />
-              </CartItemDetails>
+        <Container>
+          <Box>
+            {cartItems.map((item) => {
+              return (
+                <CartItemContainer key={item.id}>
+                  <CartItem>
+                    <CartItemDetails>
+                      <CartImage image={item.images[0]} />
+                    </CartItemDetails>
 
-              <CartItemDetails>
-                <ProductCardName>Nike shoes</ProductCardName>
-                <ProductCardPrice>$100</ProductCardPrice>
-                <Button variant="contained">remove</Button>
-              </CartItemDetails>
-              <QuantityContainer>
-                <button>
-                  <KeyboardArrowUpIcon />
-                </button>
-                <div>1</div>
-                <button>
-                  <KeyboardArrowDownIcon />
-                </button>
-              </QuantityContainer>
-            </CartItem>
-          </CartItemContainer>
-          <CartItemContainer>
-            <CartItem>
-              <CartItemDetails>
-                <CartImage image="https://img01.ztat.net/article/spp-media-p1/cfc43f5b35ca43e69e35bc6c89586550/86daded655134c0ba55d7cdcc2535bf2.jpg?imwidth=1800&filter=packshot" />
-              </CartItemDetails>
-
-              <CartItemDetails>
-                <ProductCardName>Nike shoes</ProductCardName>
-                <ProductCardPrice>$100</ProductCardPrice>
-                <Button variant="contained">Remove</Button>
-              </CartItemDetails>
-              <QuantityContainer>
-                <button>
-                  <KeyboardArrowUpIcon />
-                </button>
-                <div>1</div>
-                <button>
-                  <KeyboardArrowDownIcon />
-                </button>
-              </QuantityContainer>
-            </CartItem>
-          </CartItemContainer>
-          <CartItemContainer>
-            <CartItem>
-              <CartItemDetails>
-                <CartImage image="https://img01.ztat.net/article/spp-media-p1/cfc43f5b35ca43e69e35bc6c89586550/86daded655134c0ba55d7cdcc2535bf2.jpg?imwidth=1800&filter=packshot" />
-              </CartItemDetails>
-
-              <CartItemDetails>
-                <ProductCardName>Nike shoes</ProductCardName>
-                <ProductCardPrice>$100</ProductCardPrice>
-                <Button variant="contained">remove</Button>
-              </CartItemDetails>
-              <QuantityContainer>
-                <button>
-                  <KeyboardArrowUpIcon />
-                </button>
-                <div>1</div>
-                <button>
-                  <KeyboardArrowDownIcon />
-                </button>
-              </QuantityContainer>
-            </CartItem>
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'flex-end',
-                width: '100%',
-              }}
-            >
-              <Box>
-                <Typography variant="h5" sx={{ m: 2 }}>
-                  Total:${total}
-                </Typography>
-                <Button variant="contained" sx={{ width: '100%' }}>
-                  Checkout
-                </Button>
-              </Box>
-            </Box>
-            <Box
-              sx={{
-                width: '100%',
-                display: 'flex',
-                justifyContent: 'center ',
-                alignItems: 'center',
-              }}
-            >
-              <Button
-                variant="contained"
-                sx={{
-                  width: '400px',
-                  backgroundColor: 'red',
-                  m: 4,
-                }}
-              >
-                Clear Cart
+                    <CartItemDetails>
+                      <ProductCardName>{item.title}</ProductCardName>
+                      <ProductCardPrice>
+                        ${item.price * item.itemQuantity}
+                      </ProductCardPrice>
+                      <Button
+                        variant="contained"
+                        onClick={() => dispatch(removeItem(item.id))}
+                      >
+                        remove
+                      </Button>
+                    </CartItemDetails>
+                    <QuantityContainer>
+                      <button onClick={() => dispatch(addToCart(item))}>
+                        <KeyboardArrowUpIcon />
+                      </button>
+                      <div>{item.itemQuantity}</div>
+                      <button onClick={() => dispatch(decrementQuantity(item))}>
+                        <KeyboardArrowDownIcon />
+                      </button>
+                    </QuantityContainer>
+                  </CartItem>
+                </CartItemContainer>
+              );
+            })}
+          </Box>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'flex-end',
+              width: '100%',
+            }}
+          >
+            <Box>
+              <Typography variant="h5" sx={{ m: 2 }}>
+                Total:${cartTotal}
+              </Typography>
+              <Button variant="contained" sx={{ width: '100%' }}>
+                Checkout
               </Button>
             </Box>
-          </CartItemContainer>
-        </>
+          </Box>
+          <Box
+            sx={{
+              width: '100%',
+              display: 'flex',
+              justifyContent: 'center ',
+              alignItems: 'center',
+            }}
+          >
+            <Button
+              variant="contained"
+              sx={{
+                width: '400px',
+                backgroundColor: 'red',
+                m: 4,
+              }}
+              onClick={() => dispatch(clearCart())}
+            >
+              Clear Cart
+            </Button>
+          </Box>
+        </Container>
       )}
     </PageContainer>
   );

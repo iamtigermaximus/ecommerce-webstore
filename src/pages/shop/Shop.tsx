@@ -17,15 +17,16 @@ import { useAppSelector, useAppDispatch } from '../../hooks/reduxHook';
 import { useEffect } from 'react';
 import { fetchAllProducts } from '../../redux/reducers/productSlice';
 import DropdownOption from '../../components/dropdown-option/DropdownOption';
+import { addToCart } from '../../redux/reducers/cartSlice';
 
 const Shop = () => {
   const products = useAppSelector((state) => state.productReducer);
   const dispatch = useAppDispatch();
-  console.log(products);
 
   useEffect(() => {
     dispatch(fetchAllProducts());
   }, [dispatch]);
+
   return (
     <PageContainer>
       <Box
@@ -42,18 +43,22 @@ const Shop = () => {
       <CardsWrapper>
         {products.map((product) => {
           return (
-            <SingleProductLink to={`:${product.id}`} key={product.id}>
-              <ProdCard>
+            <ProdCard key={product.id}>
+              <SingleProductLink to={`:${product.id}`}>
                 <CardImage image={product.images[0]} />
-                <ProductCardContent>
-                  <ProductCardButton variant="outlined" color="inherit">
-                    ADD TO CART
-                  </ProductCardButton>
-                  <ProductCardName>{product.title}</ProductCardName>
-                  <ProductCardPrice>$ {product.price}</ProductCardPrice>
-                </ProductCardContent>
-              </ProdCard>
-            </SingleProductLink>
+              </SingleProductLink>
+              <ProductCardContent>
+                <ProductCardButton
+                  variant="outlined"
+                  color="inherit"
+                  onClick={() => dispatch(addToCart(product))}
+                >
+                  ADD TO CART
+                </ProductCardButton>
+                <ProductCardName>{product.title}</ProductCardName>
+                <ProductCardPrice>$ {product.price}</ProductCardPrice>
+              </ProductCardContent>
+            </ProdCard>
           );
         })}
       </CardsWrapper>

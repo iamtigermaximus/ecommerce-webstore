@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -17,8 +16,6 @@ import {
   BrandLink,
   CartLink,
 } from './Navbar.styles';
-import { RootState } from '../../redux/store';
-import { useSelector } from 'react-redux';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -45,7 +42,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
     width: '100%',
@@ -56,7 +52,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const Navbar = () => {
-  const { amount } = useSelector((state: RootState) => state.cart);
   return (
     <>
       <NavigationBar position="static">
@@ -101,7 +96,7 @@ const Navbar = () => {
               </Badge>
             </IconButton>
             <IconButton size="large" color="inherit">
-              <Badge badgeContent={amount} color="error">
+              <Badge badgeContent={0} color="error">
                 <CartLink to="/cart">
                   <ShoppingCartOutlinedIcon />
                 </CartLink>

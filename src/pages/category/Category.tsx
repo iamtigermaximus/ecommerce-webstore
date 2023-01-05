@@ -3,7 +3,10 @@ import { styled } from '@mui/material/styles';
 
 export const PageContainer = styled(Container)`
   height: 100vh;
-  background-color: pink;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
 `;
 const Category = () => {
   return <PageContainer>Category</PageContainer>;

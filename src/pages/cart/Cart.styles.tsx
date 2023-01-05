@@ -2,7 +2,7 @@ import { Box, CardMedia, Container, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 export const PageContainer = styled(Container)`
-  height: 100vh;
+  height: 100%;
   // background-color: pink;
   display: flex;
   flex-direction: column;
@@ -53,6 +53,7 @@ export const ProductCardName = styled(Typography)`
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 300px;
 `;
 
 export const ProductCardPrice = styled(Typography)`

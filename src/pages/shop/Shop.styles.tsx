@@ -27,7 +27,7 @@ export const PaginationContainer = styled(Box)`
 `;
 export const ProdCard = styled(Card)`
   width: 200px;
-  height: 300px;
+  height: 325px;
   margin: 10px;
 `;
 
@@ -51,7 +51,7 @@ export const ProductCardName = styled(Typography)`
   justify-content: center;
   align-items: center;
   margin: 10px;
-  font-size: 14px;
+  font-size: 12px;
 `;
 
 export const ProductCardPrice = styled(Typography)`
@@ -59,7 +59,7 @@ export const ProductCardPrice = styled(Typography)`
   justify-content: center;
   align-items: center;
   margin: 10px;
-  font-size: 15px;
+  font-size: 13px;
 `;
 
 export const SingleProductLink = styled(Link)`
