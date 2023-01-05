@@ -22,9 +22,14 @@ import {
 
 const Cart = () => {
   const dispatch = useAppDispatch();
-  const { cartItems, cartTotal } = useAppSelector(
-    (state: RootState) => state.cartReducer
-  );
+  const { cartItems } = useAppSelector((state: RootState) => state.cartReducer);
+
+  const getTotalPrice = () => {
+    return cartItems.reduce(
+      (accumulator, item) => accumulator + item.itemQuantity * item.price,
+      0
+    );
+  };
 
   return (
     <PageContainer>
@@ -91,7 +96,7 @@ const Cart = () => {
           >
             <Box>
               <Typography variant="h5" sx={{ m: 2 }}>
-                Total:${cartTotal}
+                Total:${getTotalPrice()}
               </Typography>
               <Button variant="contained" sx={{ width: '100%' }}>
                 Checkout

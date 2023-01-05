@@ -16,6 +16,8 @@ import {
   BrandLink,
   CartLink,
 } from './Navbar.styles';
+import { useAppSelector } from '../../hooks/reduxHook';
+import { RootState } from '../../redux/store';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -52,6 +54,13 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const Navbar = () => {
+  const { cartItems } = useAppSelector((state: RootState) => state.cartReducer);
+  const getItemsCount = () => {
+    return cartItems.reduce(
+      (accumulator, item) => accumulator + item.itemQuantity,
+      0
+    );
+  };
   return (
     <>
       <NavigationBar position="static">
@@ -96,7 +105,7 @@ const Navbar = () => {
               </Badge>
             </IconButton>
             <IconButton size="large" color="inherit">
-              <Badge badgeContent={0} color="error">
+              <Badge badgeContent={getItemsCount() || 0} color="error">
                 <CartLink to="/cart">
                   <ShoppingCartOutlinedIcon />
                 </CartLink>
