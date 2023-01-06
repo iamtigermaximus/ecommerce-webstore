@@ -4,10 +4,6 @@ import { Product } from '../../types/product';
 
 const initialState: CartState = {
   cartItems: [],
-  cartQuantity: 0,
-  itemQuantity: 0,
-  cartTotal: 0,
-  isLoading: true,
 };
 
 const cartSlice = createSlice({

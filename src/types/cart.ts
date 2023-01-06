@@ -8,8 +8,4 @@ export interface ICartProducts extends Product {
 
 export interface CartState {
   cartItems: ICartProducts[];
-  cartQuantity: number;
-  itemQuantity: number;
-  cartTotal: number;
-  isLoading: boolean;
 }

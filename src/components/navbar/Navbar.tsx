@@ -105,7 +105,7 @@ const Navbar = () => {
               </Badge>
             </IconButton>
             <IconButton size="large" color="inherit">
-              <Badge badgeContent={getItemsCount() || 0} color="error">
+              <Badge badgeContent={getItemsCount() || '0'} color="error">
                 <CartLink to="/cart">
                   <ShoppingCartOutlinedIcon />
                 </CartLink>
