@@ -19,7 +19,7 @@ import {
 } from './MostPopularSection.styles';
 
 const MostPopularSection = () => {
-  const products = useAppSelector((state) => state.productReducer);
+  const { products } = useAppSelector((state) => state.productReducer);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -31,8 +31,8 @@ const MostPopularSection = () => {
         <SectionName variant="h6">Most Popular</SectionName>
       </SectionNameContainer>
       <ProductCardsContainer>
-        {products.slice(8, 14).map((product) => {
-          return (
+        {products &&
+          products.slice(8, 14).map((product) => (
             <ProdCard key={product.id}>
               <SingleProductLink to={`:${product.id}`}>
                 <CardImage image={product.images[0]} />
@@ -49,8 +49,7 @@ const MostPopularSection = () => {
                 <ProductCardPrice>$ {product.price}</ProductCardPrice>
               </ProductCardContent>
             </ProdCard>
-          );
-        })}
+          ))}
       </ProductCardsContainer>
     </SectionContainer>
   );

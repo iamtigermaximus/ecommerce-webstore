@@ -19,7 +19,7 @@ import {
 } from '../new-arrivals-section/NewArrivalsSection.styles';
 
 const NewArrivalsSection = () => {
-  const products = useAppSelector((state) => state.productReducer);
+  const { products } = useAppSelector((state) => state.productReducer);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -31,8 +31,8 @@ const NewArrivalsSection = () => {
         <SectionName variant="h6">New Arrivals</SectionName>
       </SectionNameContainer>
       <ProductCardsContainer>
-        {products.slice(1, 7).map((product) => {
-          return (
+        {products &&
+          products.slice(1, 7).map((product) => (
             <ProdCard key={product.id}>
               <SingleProductLink to={`:${product.id}`}>
                 <CardImage image={product.images[0]} />
@@ -49,8 +49,7 @@ const NewArrivalsSection = () => {
                 <ProductCardPrice>$ {product.price}</ProductCardPrice>
               </ProductCardContent>
             </ProdCard>
-          );
-        })}
+          ))}
       </ProductCardsContainer>
     </SectionContainer>
   );

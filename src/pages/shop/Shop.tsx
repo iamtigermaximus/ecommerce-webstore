@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Box, Pagination, PaginationItem } from '@mui/material';
 import {
   PageContainer,
@@ -14,13 +15,12 @@ import {
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { useAppSelector, useAppDispatch } from '../../hooks/reduxHook';
-import { useEffect } from 'react';
 import { fetchAllProducts } from '../../redux/reducers/productSlice';
 import DropdownOption from '../../components/dropdown-option/DropdownOption';
 import { addToCart } from '../../redux/reducers/cartSlice';
 
 const Shop = () => {
-  const products = useAppSelector((state) => state.productReducer);
+  const { products } = useAppSelector((state) => state.productReducer);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -41,8 +41,8 @@ const Shop = () => {
       </Box>
 
       <CardsWrapper>
-        {products.map((product) => {
-          return (
+        {products &&
+          products.map((product) => (
             <ProdCard key={product.id}>
               <SingleProductLink to={`:${product.id}`}>
                 <CardImage image={product.images[0]} />
@@ -59,8 +59,7 @@ const Shop = () => {
                 <ProductCardPrice>$ {product.price}</ProductCardPrice>
               </ProductCardContent>
             </ProdCard>
-          );
-        })}
+          ))}
       </CardsWrapper>
       <PaginationContainer>
         <Pagination

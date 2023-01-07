@@ -17,31 +17,31 @@ export const fetchAllProducts = createAsyncThunk(
 );
 
 export interface ProductState {
-  products: [];
+  products: Product[];
 }
 
-const initialState: Product[] = [];
+const initialState: ProductState = {
+  products: [],
+};
 
 const productSlice = createSlice({
   name: 'product',
-  initialState: initialState,
+  initialState,
   reducers: {
     highestPriceFirst: (state) => {
-      state.sort((a, b) => (a.price > b.price ? -1 : 1));
+      state.products.sort((a, b) => (a.price > b.price ? -1 : 1));
     },
     lowestPriceFirst: (state) => {
-      state.sort((a, b) => (a.price < b.price ? -1 : 1));
+      state.products.sort((a, b) => (a.price < b.price ? -1 : 1));
     },
     alphabetical: (state) => {
-      state.sort((a, b) => (a.title > b.title ? -1 : 1));
+      state.products.sort((a, b) => (a.title > b.title ? -1 : 1));
     },
     alphabetical2: (state) => {
-      state.sort((a, b) => (a.title < b.title ? -1 : 1));
-    },
-    filterBy(state, action) {
-      state.filter = action.payload;
+      state.products.sort((a, b) => (a.title < b.title ? -1 : 1));
     },
   },
+
   extraReducers: (build) => {
     build.addCase(fetchAllProducts.fulfilled, (state, action) => {
       console.log('data is fetched');
@@ -69,6 +69,5 @@ export const {
   highestPriceFirst,
   alphabetical,
   alphabetical2,
-  filterBy,
 } = productSlice.actions;
 export default productReducer;
