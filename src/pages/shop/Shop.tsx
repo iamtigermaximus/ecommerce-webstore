@@ -55,7 +55,13 @@ const Shop = () => {
                 >
                   ADD TO CART
                 </ProductCardButton>
-                <ProductCardName>{product.title}</ProductCardName>
+                <ProductCardName
+                  sx={{
+                    textTransform: 'uppercase',
+                  }}
+                >
+                  {product.title}
+                </ProductCardName>
                 <ProductCardPrice>$ {product.price}</ProductCardPrice>
               </ProductCardContent>
             </ProdCard>

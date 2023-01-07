@@ -6,9 +6,7 @@ export const fetchAllProducts = createAsyncThunk(
   'fetchAllProducts',
   async () => {
     try {
-      const res = await axios.get(
-        'https://api.escuelajs.co/api/v1/products?limit=20&offset=5'
-      );
+      const res = await axios.get('https://dummyjson.com/products');
       return res.data;
     } catch (error) {
       console.log(error);
@@ -18,10 +16,12 @@ export const fetchAllProducts = createAsyncThunk(
 
 export interface ProductState {
   products: Product[];
+  catProductAll: Product[];
 }
 
 const initialState: ProductState = {
   products: [],
+  catProductAll: [],
 };
 
 const productSlice = createSlice({
@@ -39,6 +39,9 @@ const productSlice = createSlice({
     },
     alphabetical2: (state) => {
       state.products.sort((a, b) => (a.title < b.title ? -1 : 1));
+    },
+    setCategoriesProductAll(state, action) {
+      state.catProductAll.push(action.payload);
     },
   },
 
