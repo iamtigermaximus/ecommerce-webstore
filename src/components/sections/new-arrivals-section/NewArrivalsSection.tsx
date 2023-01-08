@@ -1,17 +1,18 @@
+import { Box, CardMedia, Typography } from '@mui/material';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHook';
-import { SingleProductLink } from '../../../pages/shop/Shop.styles';
 import { addToCart } from '../../../redux/reducers/cartSlice';
 import { fetchAllProducts } from '../../../redux/reducers/productSlice';
 import {
   ProdCard,
-  CardImage,
   ProductCardContent,
   ProductCardButton,
   ProductCardName,
   ProductCardPrice,
 } from '../../product-card/ProductCard.styles';
 import {
+  CardImageContainer,
   ProductCardsContainer,
   SectionContainer,
   SectionName,
@@ -21,6 +22,7 @@ import {
 const NewArrivalsSection = () => {
   const products = useAppSelector((state) => state.productReducer);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(fetchAllProducts());
@@ -34,9 +36,34 @@ const NewArrivalsSection = () => {
         {products.length > 0 &&
           products.slice(1, 7).map((product) => (
             <ProdCard key={product.id}>
-              <SingleProductLink to={`:${product.id}`}>
-                <CardImage image={product.images[0]} />
-              </SingleProductLink>
+              <CardImageContainer onClick={() => navigate(`${product.title}`)}>
+                <CardMedia
+                  component="img"
+                  height="200"
+                  image={product.images[0]}
+                />
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    color: 'white',
+                    top: 3,
+                    padding: '2px 5px',
+                    background: '#32CD32',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    borderRadius: '50px',
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      fontSize: '10px',
+                      textTransform: 'uppercase',
+                    }}
+                  >
+                    {product.category.name}
+                  </Typography>
+                </Box>
+              </CardImageContainer>
               <ProductCardContent>
                 <ProductCardButton
                   variant="outlined"

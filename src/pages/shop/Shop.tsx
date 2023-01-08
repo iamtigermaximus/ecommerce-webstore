@@ -1,16 +1,21 @@
 import { useEffect } from 'react';
-import { Box, Pagination, PaginationItem } from '@mui/material';
+import {
+  Box,
+  CardMedia,
+  Pagination,
+  PaginationItem,
+  Typography,
+} from '@mui/material';
 import {
   PageContainer,
   CardsWrapper,
   PaginationContainer,
-  CardImage,
   ProdCard,
   ProductCardButton,
   ProductCardContent,
   ProductCardName,
   ProductCardPrice,
-  SingleProductLink,
+  CardImageContainer,
 } from './Shop.styles';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
@@ -18,10 +23,13 @@ import { useAppSelector, useAppDispatch } from '../../hooks/reduxHook';
 import { fetchAllProducts } from '../../redux/reducers/productSlice';
 import DropdownOption from '../../components/dropdown-option/DropdownOption';
 import { addToCart } from '../../redux/reducers/cartSlice';
+import CategoryLists from '../../components/categories/CategoryLists';
+import { useNavigate } from 'react-router-dom';
 
 const Shop = () => {
   const products = useAppSelector((state) => state.productReducer);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(fetchAllProducts());
@@ -32,11 +40,12 @@ const Shop = () => {
       <Box
         sx={{
           display: 'flex',
-          justifyContent: 'flex-end',
+          justifyContent: 'center',
           alignItems: 'center',
           margin: '10px 20px',
         }}
       >
+        <CategoryLists />
         <DropdownOption />
       </Box>
 
@@ -44,9 +53,35 @@ const Shop = () => {
         {products.length > 0 &&
           products.map((product) => (
             <ProdCard key={product.id}>
-              <SingleProductLink to={`:${product.id}`}>
-                <CardImage image={product.images[0]} />
-              </SingleProductLink>
+              <CardImageContainer onClick={() => navigate(`${product.title}`)}>
+                <CardMedia
+                  component="img"
+                  height="200"
+                  image={product.images[0]}
+                />
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    color: 'white',
+                    top: 3,
+                    padding: '2px 5px',
+                    background: '#32CD32',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    borderRadius: '50px',
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      fontSize: '10px',
+                      textTransform: 'uppercase',
+                    }}
+                  >
+                    {product.category.name}
+                  </Typography>
+                </Box>
+              </CardImageContainer>
+
               <ProductCardContent>
                 <ProductCardButton
                   variant="outlined"

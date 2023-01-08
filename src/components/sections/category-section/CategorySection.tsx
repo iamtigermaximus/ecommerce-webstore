@@ -1,4 +1,7 @@
-import { CardMedia, CardContent } from '@mui/material';
+import { CardMedia, CardContent, Container } from '@mui/material';
+import { useEffect } from 'react';
+import { useAppSelector, useAppDispatch } from '../../../hooks/reduxHook';
+import { fetchAllCategories } from '../../../redux/reducers/categorySlice';
 import {
   CategorySectionContainer,
   SectionNameContainer,
@@ -9,49 +12,33 @@ import {
 } from './CategorySection.styles';
 
 const CategorySection = () => {
+  const categories = useAppSelector((state) => state.categoryReducer);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchAllCategories());
+  }, [dispatch]);
   return (
     <CategorySectionContainer maxWidth={false}>
       <SectionNameContainer>
         <SectionName variant="h6">Categories</SectionName>
       </SectionNameContainer>
-      <CategoryCardContainer>
-        <CategoryCard>
-          <CardMedia
-            sx={{ height: 250, width: '100%' }}
-            image="https://img01.ztat.net/article/spp-media-p1/cfc43f5b35ca43e69e35bc6c89586550/86daded655134c0ba55d7cdcc2535bf2.jpg?imwidth=1800&filter=packshot"
-          />
-          <CardContent>
-            <CategoryName>Clothes</CategoryName>
-          </CardContent>
-        </CategoryCard>
-        <CategoryCard>
-          <CardMedia
-            sx={{ height: 250, width: '100%' }}
-            image="https://img01.ztat.net/article/spp-media-p1/cfc43f5b35ca43e69e35bc6c89586550/86daded655134c0ba55d7cdcc2535bf2.jpg?imwidth=1800&filter=packshot"
-          />
-          <CardContent>
-            <CategoryName>Shoes</CategoryName>
-          </CardContent>
-        </CategoryCard>
-        <CategoryCard>
-          <CardMedia
-            sx={{ height: 250, width: '100%' }}
-            image="https://img01.ztat.net/article/spp-media-p1/cfc43f5b35ca43e69e35bc6c89586550/86daded655134c0ba55d7cdcc2535bf2.jpg?imwidth=1800&filter=packshot"
-          />
-          <CardContent>
-            <CategoryName>Furniture</CategoryName>
-          </CardContent>
-        </CategoryCard>
-        <CategoryCard>
-          <CardMedia
-            sx={{ height: 250, width: '100%' }}
-            image="https://img01.ztat.net/article/spp-media-p1/cfc43f5b35ca43e69e35bc6c89586550/86daded655134c0ba55d7cdcc2535bf2.jpg?imwidth=1800&filter=packshot"
-          />
-          <CardContent>
-            <CategoryName>Others</CategoryName>
-          </CardContent>
-        </CategoryCard>
-      </CategoryCardContainer>
+
+      <Container sx={{ display: 'flex', flexDirection: 'row' }}>
+        {categories.slice(0, 5).map((category) => (
+          <CategoryCardContainer key={category.id}>
+            <CategoryCard key={category.id}>
+              <CardMedia
+                sx={{ height: 250, width: '100%' }}
+                image={category.image}
+              />
+              <CardContent>
+                <CategoryName>{category.name}</CategoryName>
+              </CardContent>
+            </CategoryCard>
+          </CategoryCardContainer>
+        ))}
+      </Container>
     </CategorySectionContainer>
   );
 };

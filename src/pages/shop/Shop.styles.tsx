@@ -11,7 +11,6 @@ import { Link } from 'react-router-dom';
 
 export const PageContainer = styled(Container)`
   height: 100%;
-  padding: 50px;
 `;
 
 export const CardsWrapper = styled(Grid)`
@@ -64,4 +63,7 @@ export const ProductCardPrice = styled(Typography)`
 
 export const SingleProductLink = styled(Link)`
   text-decoration: none;
+`;
+export const CardImageContainer = styled(Box)`
+  position: relative;
 `;

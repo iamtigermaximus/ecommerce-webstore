@@ -22,3 +22,7 @@ export const ProductCardsContainer = styled(Box)`
   flex-direction: row;
   justify-content: center;
 `;
+
+export const CardImageContainer = styled(Box)`
+  position: relative;
+`;

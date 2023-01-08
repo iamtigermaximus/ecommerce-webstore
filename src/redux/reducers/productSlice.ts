@@ -32,6 +32,9 @@ const productSlice = createSlice({
     alphabetical2: (state) => {
       state.sort((a, b) => (a.title < b.title ? -1 : 1));
     },
+    filterBy: (state, action) => {
+      return state.filter((product) => product.category.id === action.payload);
+    },
   },
 
   extraReducers: (build) => {
@@ -61,5 +64,6 @@ export const {
   highestPriceFirst,
   alphabetical,
   alphabetical2,
+  filterBy,
 } = productSlice.actions;
 export default productReducer;

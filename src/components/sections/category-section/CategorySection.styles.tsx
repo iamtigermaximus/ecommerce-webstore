@@ -5,7 +5,6 @@ export const CategorySectionContainer = styled(Container)`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 400px;
   margin-top: 20px;
 `;
 
@@ -19,12 +18,12 @@ export const SectionName = styled(Typography)`
 
 export const CategoryCardContainer = styled(Box)`
   display: flex;
-  flex-direction: row;
   justify-content: center;
+  align-items: center;
 `;
 
 export const CategoryCard = styled(Card)`
-  width: 300px;
+  width: 200px;
   height: 300px;
   margin: 10px;
 `;
