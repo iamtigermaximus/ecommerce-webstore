@@ -20,7 +20,7 @@ import DropdownOption from '../../components/dropdown-option/DropdownOption';
 import { addToCart } from '../../redux/reducers/cartSlice';
 
 const Shop = () => {
-  const { products } = useAppSelector((state) => state.productReducer);
+  const products = useAppSelector((state) => state.productReducer);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -41,7 +41,7 @@ const Shop = () => {
       </Box>
 
       <CardsWrapper>
-        {products &&
+        {products.length > 0 &&
           products.map((product) => (
             <ProdCard key={product.id}>
               <SingleProductLink to={`:${product.id}`}>

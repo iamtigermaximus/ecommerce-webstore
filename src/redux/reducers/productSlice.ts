@@ -6,7 +6,7 @@ export const fetchAllProducts = createAsyncThunk(
   'fetchAllProducts',
   async () => {
     try {
-      const res = await axios.get('https://dummyjson.com/products');
+      const res = await axios.get('https://api.escuelajs.co/api/v1/products');
       return res.data;
     } catch (error) {
       console.log(error);
@@ -14,34 +14,23 @@ export const fetchAllProducts = createAsyncThunk(
   }
 );
 
-export interface ProductState {
-  products: Product[];
-  catProductAll: Product[];
-}
-
-const initialState: ProductState = {
-  products: [],
-  catProductAll: [],
-};
+const initialState: Product[] = [];
 
 const productSlice = createSlice({
   name: 'product',
   initialState,
   reducers: {
     highestPriceFirst: (state) => {
-      state.products.sort((a, b) => (a.price > b.price ? -1 : 1));
+      state.sort((a, b) => (a.price > b.price ? -1 : 1));
     },
     lowestPriceFirst: (state) => {
-      state.products.sort((a, b) => (a.price < b.price ? -1 : 1));
+      state.sort((a, b) => (a.price < b.price ? -1 : 1));
     },
     alphabetical: (state) => {
-      state.products.sort((a, b) => (a.title > b.title ? -1 : 1));
+      state.sort((a, b) => (a.title > b.title ? -1 : 1));
     },
     alphabetical2: (state) => {
-      state.products.sort((a, b) => (a.title < b.title ? -1 : 1));
-    },
-    setCategoriesProductAll(state, action) {
-      state.catProductAll.push(action.payload);
+      state.sort((a, b) => (a.title < b.title ? -1 : 1));
     },
   },
 

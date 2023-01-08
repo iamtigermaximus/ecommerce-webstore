@@ -19,7 +19,7 @@ import {
 } from './MostPopularSection.styles';
 
 const MostPopularSection = () => {
-  const { products } = useAppSelector((state) => state.productReducer);
+  const products = useAppSelector((state) => state.productReducer);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -31,7 +31,7 @@ const MostPopularSection = () => {
         <SectionName variant="h6">Most Popular</SectionName>
       </SectionNameContainer>
       <ProductCardsContainer>
-        {products &&
+        {products.length > 0 &&
           products.slice(8, 14).map((product) => (
             <ProdCard key={product.id}>
               <SingleProductLink to={`:${product.id}`}>
