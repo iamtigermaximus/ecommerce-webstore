@@ -17,7 +17,10 @@ const App = () => {
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/">
+            <Route path="" element={<Home />} />
+            <Route path=":category" element={<Category />} />
+          </Route>
           <Route path="/shop">
             <Route path="" element={<Shop />} />
             <Route path=":title" element={<Product />} />

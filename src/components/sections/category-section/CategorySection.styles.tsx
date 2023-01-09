@@ -3,7 +3,7 @@ import { styled } from '@mui/material/styles';
 
 export const CategorySectionContainer = styled(Container)`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   margin-top: 20px;
 `;
@@ -25,7 +25,6 @@ export const CategoryCardContainer = styled(Box)`
 export const CategoryCard = styled(Card)`
   width: 200px;
   height: 300px;
-  margin: 10px;
 `;
 
 export const CategoryName = styled(Typography)`

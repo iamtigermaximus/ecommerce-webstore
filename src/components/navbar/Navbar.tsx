@@ -139,11 +139,6 @@ const Navbar = () => {
           </Box>
           <Box>
             <Typography variant="h6" noWrap sx={{ m: 1 }}>
-              <MenuLink to="/category">CATEGORY</MenuLink>
-            </Typography>
-          </Box>
-          <Box>
-            <Typography variant="h6" noWrap sx={{ m: 1 }}>
               <MenuLink to="/blog">BLOG</MenuLink>
             </Typography>
           </Box>

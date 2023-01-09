@@ -1,11 +1,10 @@
 import { CardMedia, CardContent, Container } from '@mui/material';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../../hooks/reduxHook';
 import { fetchAllCategories } from '../../../redux/reducers/categorySlice';
 import {
   CategorySectionContainer,
-  SectionNameContainer,
-  SectionName,
   CategoryCardContainer,
   CategoryCard,
   CategoryName,
@@ -14,18 +13,19 @@ import {
 const CategorySection = () => {
   const categories = useAppSelector((state) => state.categoryReducer);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(fetchAllCategories());
   }, [dispatch]);
   return (
     <CategorySectionContainer maxWidth={false}>
-      <SectionNameContainer>
+      {/* <SectionNameContainer>
         <SectionName variant="h6">Categories</SectionName>
-      </SectionNameContainer>
+      </SectionNameContainer> */}
 
-      <Container sx={{ display: 'flex', flexDirection: 'row' }}>
-        {categories.slice(0, 5).map((category) => (
+      {categories.slice(0, 5).map((category) => (
+        <Container onClick={() => navigate(`${category.name}`)}>
           <CategoryCardContainer key={category.id}>
             <CategoryCard key={category.id}>
               <CardMedia
@@ -37,8 +37,8 @@ const CategorySection = () => {
               </CardContent>
             </CategoryCard>
           </CategoryCardContainer>
-        ))}
-      </Container>
+        </Container>
+      ))}
     </CategorySectionContainer>
   );
 };
