@@ -33,9 +33,7 @@ const productSlice = createSlice({
       state.sort((a, b) => (a.title < b.title ? -1 : 1));
     },
     filterBy: (state, action) => {
-      return state.filter(
-        (product) => product.category.name === action.payload
-      );
+      return state.filter((product) => product.category.id === action.payload);
     },
   },
 

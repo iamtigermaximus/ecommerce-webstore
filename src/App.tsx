@@ -10,6 +10,7 @@ import About from './pages/about/About';
 import NotFound from './pages/not-found/NotFound';
 import Category from './pages/category/Category';
 import Footer from './components/footer/Footer';
+import Register from './pages/user-forms/register/Register';
 
 const App = () => {
   return (
@@ -19,7 +20,10 @@ const App = () => {
         <Routes>
           <Route path="/">
             <Route path="" element={<Home />} />
-            <Route path=":category" element={<Category />} />
+            <Route path=":category">
+              <Route path="" element={<Category />} />
+              <Route path=":title" element={<Product />} />
+            </Route>
           </Route>
           <Route path="/shop">
             <Route path="" element={<Shop />} />
@@ -32,6 +36,7 @@ const App = () => {
           <Route path="/cart" element={<Cart />} />
           <Route path="/*" element={<NotFound />} />
           <Route path=":title" element={<Product />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
         <Footer />
       </BrowserRouter>

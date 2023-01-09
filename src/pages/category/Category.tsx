@@ -34,7 +34,7 @@ const Category = () => {
           .filter((product) => product.category.name === category)
           .map((product) => (
             <ProdCard key={product.id}>
-              <CardImageContainer>
+              <CardImageContainer onClick={() => navigate(`${product.title}`)}>
                 <CardMedia
                   component="img"
                   height="200"
