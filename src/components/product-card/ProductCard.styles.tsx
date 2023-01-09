@@ -11,6 +11,11 @@ export const ProdCard = styled(Card)`
   width: 200px;
   height: 325px;
   margin: 10px;
+
+  &:hover {
+    transform: scale(1.1);
+    transition: 0.5s;
+  }
 `;
 
 export const CardImage = styled(CardMedia)`

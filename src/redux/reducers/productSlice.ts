@@ -35,6 +35,11 @@ const productSlice = createSlice({
     filterBy: (state, action) => {
       return state.filter((product) => product.category.id === action.payload);
     },
+    // searchByName: (state, action) => {
+    //   state = state.filter((product) =>
+    //     product.title.toLowerCase().includes(action.payload.toLowerCase())
+    //   );
+    // },
   },
 
   extraReducers: (build) => {

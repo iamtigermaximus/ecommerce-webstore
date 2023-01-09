@@ -18,6 +18,7 @@ import {
 } from './Navbar.styles';
 import { useAppSelector } from '../../hooks/reduxHook';
 import { RootState } from '../../redux/store';
+// import { searchByName } from '../../redux/reducers/productSlice';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -55,6 +56,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const Navbar = () => {
   const { cartItems } = useAppSelector((state: RootState) => state.cartReducer);
+
   const getItemsCount = () => {
     return cartItems.reduce(
       (accumulator, item) => accumulator + item.itemQuantity,
@@ -98,7 +100,7 @@ const Navbar = () => {
               aria-label="show 4 new mails"
               color="inherit"
             >
-              <Badge badgeContent={1} color="error">
+              <Badge badgeContent={'0'} color="error">
                 <CartLink to="/">
                   <FavoriteBorderIcon />
                 </CartLink>

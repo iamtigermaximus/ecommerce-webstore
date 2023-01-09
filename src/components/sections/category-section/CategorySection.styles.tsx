@@ -25,6 +25,11 @@ export const CategoryCardContainer = styled(Box)`
 export const CategoryCard = styled(Card)`
   width: 200px;
   height: 300px;
+
+  &:hover {
+    transform: scale(1.05);
+    transition: 0.5s;
+  }
 `;
 
 export const CategoryName = styled(Typography)`
