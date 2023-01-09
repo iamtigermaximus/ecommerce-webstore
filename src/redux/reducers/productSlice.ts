@@ -33,13 +33,20 @@ const productSlice = createSlice({
       state.sort((a, b) => (a.title < b.title ? -1 : 1));
     },
     filterBy: (state, action) => {
-      return state.filter((product) => product.category.id === action.payload);
+      return state.filter(
+        (product) => product.category.name === action.payload
+      );
     },
-    // searchByName: (state, action) => {
-    //   state = state.filter((product) =>
-    //     product.title.toLowerCase().includes(action.payload.toLowerCase())
-    //   );
-    // },
+    searchByName: (state, action) => {
+      const filteredProducts = state.filter((product) =>
+        product.title.toLowerCase().includes(action.payload.toLowerCase())
+      );
+      return {
+        ...state,
+        filteredProducts:
+          action.payload.length > 0 ? filteredProducts : [...state],
+      };
+    },
   },
 
   extraReducers: (build) => {

@@ -19,7 +19,7 @@ const CategoryLists = () => {
             variant="contained"
             sx={{ m: 1, width: '120px' }}
             key={category.id}
-            onClick={() => dispatch(filterBy(category.id))}
+            onClick={() => dispatch(filterBy(category.name))}
           >
             {category.name}
           </Button>

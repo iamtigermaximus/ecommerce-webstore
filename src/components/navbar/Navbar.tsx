@@ -120,7 +120,7 @@ const Navbar = () => {
               aria-haspopup="true"
               color="inherit"
             >
-              <CartLink to="/">
+              <CartLink to="/login">
                 <AccountBoxOutlinedIcon />
               </CartLink>
             </IconButton>

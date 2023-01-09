@@ -11,6 +11,7 @@ import NotFound from './pages/not-found/NotFound';
 import Category from './pages/category/Category';
 import Footer from './components/footer/Footer';
 import Register from './pages/user-forms/register/Register';
+import Login from './pages/user-forms/login/Login';
 
 const App = () => {
   return (
@@ -35,7 +36,7 @@ const App = () => {
           <Route path="/profile" element={<Profile />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/*" element={<NotFound />} />
-          <Route path=":title" element={<Product />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Routes>
         <Footer />

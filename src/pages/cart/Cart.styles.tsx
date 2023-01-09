@@ -2,7 +2,7 @@ import { Box, CardMedia, Container, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 export const PageContainer = styled(Container)`
-  height: 100%;
+  height: 100vh;
   // background-color: pink;
   display: flex;
   flex-direction: column;

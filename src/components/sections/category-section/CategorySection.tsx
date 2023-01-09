@@ -25,9 +25,12 @@ const CategorySection = () => {
       </SectionNameContainer> */}
 
       {categories.slice(0, 5).map((category) => (
-        <Container onClick={() => navigate(`${category.name}`)}>
-          <CategoryCardContainer key={category.id}>
-            <CategoryCard key={category.id}>
+        <Container
+          onClick={() => navigate(`${category.name}`)}
+          key={category.id}
+        >
+          <CategoryCardContainer>
+            <CategoryCard>
               <CardMedia
                 sx={{ height: 250, width: '100%' }}
                 image={category.image}
