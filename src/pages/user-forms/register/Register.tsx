@@ -4,6 +4,8 @@ import * as yup from 'yup';
 import { Box, Button, Container, TextField, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../../../hooks/reduxHook';
+import { registerUser } from '../../../redux/reducers/authSlice';
 
 export const PageContainer = styled(Container)`
   height: 100vh;
@@ -15,6 +17,7 @@ interface IFormInputs {
   name: string;
   email: string;
   password: string;
+  avatar: FileList | string;
 }
 
 const schema = yup
@@ -22,11 +25,13 @@ const schema = yup
     name: yup.string().required(),
     email: yup.string().email().required(),
     password: yup.string().min(8).max(32).required(),
+    avatar: yup.mixed().required(),
   })
   .required();
 
 const Register = () => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const {
     register,
     handleSubmit,
@@ -34,8 +39,10 @@ const Register = () => {
   } = useForm<IFormInputs>({
     resolver: yupResolver(schema),
   });
-  const onSubmit = (data: IFormInputs) => console.log(data);
-
+  const onSubmit = (data: IFormInputs) => {
+    console.log(data);
+    dispatch(registerUser(data));
+  };
   return (
     <PageContainer>
       <Container
@@ -82,6 +89,15 @@ const Register = () => {
               {...register('password', { required: 'Required' })}
               error={!!errors.password}
               helperText={errors.password ? errors.password.message : null}
+              sx={{ mb: 2 }}
+            />
+            <label>Avatar</label>
+            <TextField
+              variant="outlined"
+              type="file"
+              {...register('avatar', { required: 'Required' })}
+              error={!!errors.avatar}
+              helperText={errors.avatar ? errors.avatar.message : null}
               sx={{ mb: 2 }}
             />
             <Button variant="contained" type="submit">

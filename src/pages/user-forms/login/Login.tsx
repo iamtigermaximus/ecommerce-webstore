@@ -4,6 +4,9 @@ import * as yup from 'yup';
 import { Box, Button, Container, TextField, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
+import { loginUser } from '../../../redux/reducers/authSlice';
+import { useAppDispatch } from '../../../hooks/reduxHook';
+import { useState } from 'react';
 
 export const PageContainer = styled(Container)`
   height: 100vh;
@@ -11,30 +14,38 @@ export const PageContainer = styled(Container)`
   justify-content: center;
 `;
 
-interface IFormInputs {
-  name: string;
+interface ILoginInputs {
   email: string;
   password: string;
 }
 
 const schema = yup
   .object({
-    name: yup.string().required(),
     email: yup.string().email().required(),
     password: yup.string().min(8).max(32).required(),
   })
   .required();
 
-const Register = () => {
+const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IFormInputs>({
+  } = useForm<ILoginInputs>({
     resolver: yupResolver(schema),
   });
-  const onSubmit = (data: IFormInputs) => console.log(data);
+  const onSubmit = (data: ILoginInputs) => {
+    dispatch(loginUser(data))
+      .unwrap()
+      .then(() => navigate('/'));
+    console.log(data);
+  };
 
   return (
     <PageContainer>
@@ -67,6 +78,9 @@ const Register = () => {
               error={!!errors.email}
               helperText={errors.email ? errors.email.message : null}
               sx={{ mb: 2 }}
+              onChange={(e) => setEmail(e.target.value)}
+              type="email"
+              value={email}
             />
             <TextField
               variant="outlined"
@@ -75,6 +89,9 @@ const Register = () => {
               error={!!errors.password}
               helperText={errors.password ? errors.password.message : null}
               sx={{ mb: 2 }}
+              onChange={(e) => setPassword(e.target.value)}
+              type="password"
+              value={password}
             />
             <Button variant="contained" type="submit">
               Submit
@@ -100,4 +117,4 @@ const Register = () => {
     </PageContainer>
   );
 };
-export default Register;
+export default Login;
