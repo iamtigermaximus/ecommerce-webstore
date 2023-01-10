@@ -1,18 +1,12 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { Box, Button, Container, TextField, Typography } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import { Box, Button, TextField, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { loginUser } from '../../../redux/reducers/authSlice';
 import { useAppDispatch } from '../../../hooks/reduxHook';
 import { useState } from 'react';
-
-export const PageContainer = styled(Container)`
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-`;
+import { LoginContainer, PageContainer } from './Login.styles';
 
 interface ILoginInputs {
   email: string;
@@ -40,6 +34,7 @@ const Login = () => {
   } = useForm<ILoginInputs>({
     resolver: yupResolver(schema),
   });
+
   const onSubmit = (data: ILoginInputs) => {
     dispatch(loginUser(data))
       .unwrap()
@@ -49,12 +44,10 @@ const Login = () => {
 
   return (
     <PageContainer>
-      <Container
+      <LoginContainer
         maxWidth="xs"
         sx={{
-          height: '500px',
           p: 4,
-          marginTop: '50px',
           boxShadow: 6,
         }}
       >
@@ -113,7 +106,7 @@ const Login = () => {
             </Button>
           </Box>
         </form>
-      </Container>
+      </LoginContainer>
     </PageContainer>
   );
 };

@@ -1,17 +1,11 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { Box, Button, Container, TextField, Typography } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import { Box, Button, TextField, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../../hooks/reduxHook';
 import { registerUser } from '../../../redux/reducers/authSlice';
-
-export const PageContainer = styled(Container)`
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-`;
+import { PageContainer, RegisterContainer } from './Register.styles';
 
 interface IFormInputs {
   name: string;
@@ -45,12 +39,10 @@ const Register = () => {
   };
   return (
     <PageContainer>
-      <Container
+      <RegisterContainer
         maxWidth="xs"
         sx={{
-          height: '500px',
           p: 4,
-          marginTop: '50px',
           boxShadow: 6,
         }}
       >
@@ -116,7 +108,7 @@ const Register = () => {
             <Button variant="text">Login to your account? </Button>
           </Box>
         </form>
-      </Container>
+      </RegisterContainer>
     </PageContainer>
   );
 };

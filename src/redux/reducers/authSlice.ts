@@ -1,21 +1,12 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 import axiosInstance from '../../common/axiosInstance';
-
-export interface IUserRegister {
-  name: string;
-  email: string;
-  password: string;
-  avatar: FileList | string;
-}
-
-export interface AuthCreds {
-  email: string;
-  password: string;
-}
-export interface ReturnedAuthCreds {
-  access_token: string;
-}
+import {
+  AuthCreds,
+  IUserRegister,
+  ReturnedAuthCreds,
+  UserState,
+} from '../../types/auth';
 
 export const fetchUsers = createAsyncThunk(
   'fetchUsers',
@@ -87,19 +78,6 @@ export const registerUser = createAsyncThunk(
     }
   }
 );
-
-export interface User {
-  id: string;
-  name: string;
-  email: string;
-  password: string;
-  avatar: FileList | string;
-}
-export interface UserState {
-  userList: [];
-  currentUser?: User;
-  success: boolean;
-}
 
 const initialState: UserState = {
   userList: [],
