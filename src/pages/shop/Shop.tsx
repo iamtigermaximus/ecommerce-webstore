@@ -53,7 +53,9 @@ const Shop = () => {
         {products.length > 0 &&
           products.map((product) => (
             <ProdCard key={product.id}>
-              <CardImageContainer onClick={() => navigate(`${product.title}`)}>
+              <CardImageContainer
+                onClick={() => navigate(`/category/${product.title}`)}
+              >
                 <CardMedia
                   component="img"
                   height="200"
