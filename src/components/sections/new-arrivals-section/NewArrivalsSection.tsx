@@ -36,7 +36,9 @@ const NewArrivalsSection = () => {
         {products.length > 0 &&
           products.slice(1, 7).map((product) => (
             <ProdCard key={product.id}>
-              <CardImageContainer onClick={() => navigate(`${product.title}`)}>
+              <CardImageContainer
+                onClick={() => navigate(`/category/${product.title}`)}
+              >
                 <CardMedia
                   component="img"
                   height="200"
