@@ -64,7 +64,7 @@ const Login = () => {
   return (
     <PageContainer>
       {authInfo.loggedIn ? (
-        <h1>AYOS</h1>
+        ''
       ) : (
         <LoginContainer
           maxWidth="xs"
