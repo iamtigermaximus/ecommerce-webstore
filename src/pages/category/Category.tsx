@@ -1,5 +1,6 @@
 import { Box, CardMedia, Tab, Typography } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
+import DropdownOption from '../../components/dropdown-option/DropdownOption';
 import { useAppSelector, useAppDispatch } from '../../hooks/reduxHook';
 import { addToCart } from '../../redux/reducers/cartSlice';
 import {
@@ -28,7 +29,18 @@ const Category = () => {
       >
         <Tab label="BACK" onClick={() => navigate(-1)} />
       </Box>
+
       <Box>{category}</Box>
+      <Box
+        sx={{
+          width: '100%',
+          display: 'flex',
+          justifyContent: 'flex-end',
+          paddingRight: '35px',
+        }}
+      >
+        <DropdownOption />
+      </Box>
       <CardsWrapper>
         {products
           .filter((product) => product.category.name === category)
