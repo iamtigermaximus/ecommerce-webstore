@@ -1,53 +1,42 @@
-# Front-end Project
+# Front-end Project: eShop - eCommerce Webstore
 
 ## [Project Demo](https://fs13-frontend-project.vercel.app/)
 
 ![React](https://img.shields.io/badge/React-v.18-blue)
 ![Redux toolkit](https://img.shields.io/badge/Redux-v.1.9-purple)
 ![TypeScript](https://img.shields.io/badge/TypeScript-v.4.9-green)
-![SASS](https://img.shields.io/badge/SASS-v.4.9-hotpink)
 
-This project requires implementation of TypeScript and SASS.
 
-## Requirement
+## An ecommerce platform for selling products online.
 
-1. Use the API endpoint [https://fakeapi.platzi.com/](https://fakeapi.platzi.com/) to create an e-commerce website. Read the documentation and learn how to use the different endpoints.
-2. Create at lease 4 pages (can be more if you want): Home page, product page,
-   profile page (only available if user logins), and cart page (cart could be a page or a modal)
-3. Create Redux store for following features:
-   - product reducer: get all products, find a single products, sort products by
-     categories, sort products by price. Create, update and delete a product (enable update & delete features only for admin of the webapp. For example, you can check if user is your admin account before let them delete product)
-   - user reducer: Register and Login
-   - cart reducer: add product to cart, remove products, update products's quantity in cart
-4. When adding routers to your application, programatically set certain routes to be private. For example, route to user profile page should not be accessible if user has not logged in.
-5. Deploy the application and rewrite README file.
+## Technologies:
+- React
+- Typescript
+- Material UI
+- Redux
 
-## Bonus
+- API endpoint : [https://fakeapi.platzi.com/](https://fakeapi.platzi.com/) 
 
-1. Use context API to switch theme
-2. Implement unit testing for the reducers
+## Features:
+- display products by category
+- sort products from lowest price to highest price (lowest price - highest price , highest price - lowest price)
+- sort products alphabetically (A-Z , Z-A)
+- display single product details
+- CART: add to cart
+-  update products's quantity in cart
+- calculates total price of products in the cart
+- remove products from the cart
+- clear all products in the cart
+- register and login as a user
 
-## Instruction to start the project
+## Limitations:
+- not yet responsive to smaller screen
+- logged in profile and protected route still in progress
 
-In the project directory, you can run:
 
-### `npm install`
 
-Install all the dependencies
+<img width="641" alt="Screenshot 2023-01-11 at 16 18 31" src="https://user-images.githubusercontent.com/46716968/211834754-557c81d6-0b08-4f12-b285-aa5518578f18.png">
+<img width="650" alt="Screenshot 2023-01-11 at 16 19 48" src="https://user-images.githubusercontent.com/46716968/211834776-f299e310-c555-4282-ad04-b161852911e2.png">
+<img width="646" alt="Screenshot 2023-01-11 at 16 20 59" src="https://user-images.githubusercontent.com/46716968/211834781-57672b41-d231-4c3f-b3d5-e17a7e02408e.png">
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
