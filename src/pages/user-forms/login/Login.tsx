@@ -3,10 +3,10 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { Box, Button, TextField, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { loginUser } from '../../../redux/reducers/userSlice';
-import { useAppDispatch } from '../../../hooks/reduxHook';
-import { useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHook';
+import { useEffect, useState } from 'react';
 import { LoginContainer, PageContainer } from './Login.styles';
+import { loginUser } from '../../../redux/reducers/authSlice';
 
 interface ILoginInputs {
   email: string;
@@ -23,23 +23,40 @@ const schema = yup
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const authInfo = useAppSelector((state) => state.authReducer);
+  // const usersInfo = useAppSelector((state) => state.userReducer);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  useEffect(() => {
+    if (authInfo.loggedIn && !authInfo.error) navigate('/');
+  });
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ILoginInputs>({
+  } = useForm({
+    defaultValues: {
+      email: '',
+      password: '',
+    },
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data: ILoginInputs) => {
-    dispatch(loginUser(data))
-      .unwrap()
-      .then(() => navigate('/'));
-    console.log(data);
+  const onSubmit = async (data: ILoginInputs) => {
+    try {
+      const credentials = {
+        email: data.email,
+        password: data.password,
+      };
+      await dispatch(loginUser(credentials))
+        .unwrap()
+        .then(() => navigate('/profile'));
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (

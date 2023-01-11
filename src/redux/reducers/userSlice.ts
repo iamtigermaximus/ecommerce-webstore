@@ -1,12 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 import axiosInstance from '../../common/axiosInstance';
-import {
-  AuthCreds,
-  IUserRegister,
-  ReturnedAuthCreds,
-  UserState,
-} from '../../types/auth';
+import { IUserRegister, User } from '../../types/auth';
 
 export const fetchUsers = createAsyncThunk(
   'fetchUsers',
@@ -14,39 +9,6 @@ export const fetchUsers = createAsyncThunk(
   async () => {
     const response = await axiosInstance.get('/users');
     return response.data;
-  }
-);
-
-export const authenticateCredentials = createAsyncThunk(
-  'authenticateCredentials',
-  async (access_token: string) => {
-    try {
-      const response = await axiosInstance.post('/auth/profile', {
-        headers: { Authorization: `Bearer${access_token}` },
-      });
-      const data: ReturnedAuthCreds = response.data;
-      return data;
-    } catch (e) {
-      const error = e as AxiosError;
-      return error;
-    }
-  }
-);
-
-export const loginUser = createAsyncThunk(
-  'loginUser ',
-  async ({ email, password }: AuthCreds) => {
-    try {
-      const response = await axiosInstance.post('/auth/login', {
-        email,
-        password,
-      });
-      const data: ReturnedAuthCreds = response.data;
-      return data;
-    } catch (e) {
-      const error = e as AxiosError;
-      return error;
-    }
   }
 );
 
@@ -79,13 +41,10 @@ export const registerUser = createAsyncThunk(
   }
 );
 
-const initialState: UserState = {
-  userList: [],
-  success: false,
-};
+const initialState: User[] = [];
 
 export const userSlice = createSlice({
-  name: 'user',
+  name: 'userSlice',
   initialState,
   reducers: {},
   extraReducers: (build) => {

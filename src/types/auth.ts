@@ -25,3 +25,19 @@ export interface UserState {
   currentUser?: User;
   success: boolean;
 }
+
+// export interface User {
+//   id: number;
+//   email: string;
+//   password: string;
+//   name: string;
+//   role: string;
+//   avatar: string;
+// }
+
+export interface IAuthState {
+  loggedIn: boolean;
+  userInfo: User | null;
+  error: boolean;
+  errorMsg: string;
+}
