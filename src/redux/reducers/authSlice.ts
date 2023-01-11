@@ -24,22 +24,6 @@ export const authenticateCredentials = createAsyncThunk(
   }
 );
 
-// export const loginUser = createAsyncThunk(
-//   'loginUser ',
-//   async ({ email, password }: AuthCreds) => {
-//     try {
-//       const response = await axiosInstance.post('/auth/login', {
-//         email,
-//         password,
-//       });
-//       const data: ReturnedAuthCreds = response.data;
-//       return data;
-//     } catch (e) {
-//       const error = e as AxiosError;
-//       return error;
-//     }
-//   }
-// );
 export const loginUser = createAsyncThunk(
   'loginUser',
   async (credentials: AuthCreds) => {
@@ -58,7 +42,7 @@ export const loginUser = createAsyncThunk(
       }
     } catch (e) {
       const error = e as AxiosError;
-      let errorMsg = 'Something went wrong please try again';
+      let errorMsg = 'Something went wrong.';
       if (error.response?.status === 401) {
         errorMsg = 'Email or Password are incorrect';
       }

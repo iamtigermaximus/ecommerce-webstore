@@ -9,6 +9,7 @@ export interface AuthCreds {
   email: string;
   password: string;
 }
+
 export interface ReturnedAuthCreds {
   access_token: string;
 }
@@ -20,20 +21,12 @@ export interface User {
   password: string;
   avatar: string;
 }
+
 export interface UserState {
   userList: [];
   currentUser?: User;
   success: boolean;
 }
-
-// export interface User {
-//   id: number;
-//   email: string;
-//   password: string;
-//   name: string;
-//   role: string;
-//   avatar: string;
-// }
 
 export interface IAuthState {
   loggedIn: boolean;

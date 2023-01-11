@@ -20,10 +20,6 @@ const CategorySection = () => {
   }, [dispatch]);
   return (
     <CategorySectionContainer maxWidth={false}>
-      {/* <SectionNameContainer>
-        <SectionName variant="h6">Categories</SectionName>
-      </SectionNameContainer> */}
-
       {categories.slice(0, 5).map((category) => (
         <Container
           onClick={() => navigate(`${category.name}`)}
