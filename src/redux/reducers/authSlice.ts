@@ -70,7 +70,7 @@ export const loginUser = createAsyncThunk(
   }
 );
 
-export const userlogout = (state: IAuthState) => {
+export const logoutUser = (state: IAuthState) => {
   return {
     ...state,
     error: false,
@@ -91,7 +91,13 @@ export const authSlice = createSlice({
   name: 'authSlice',
   initialState: initialState,
   reducers: {
-    userLogout: userlogout,
+    logout: (state) => {
+      localStorage.removeItem('userToken'); // deletes token from storage
+      state.loggedIn = false;
+      state.userInfo = null;
+      state.error = false;
+      state.errorMsg = '';
+    },
   },
   extraReducers(builder) {
     builder.addCase(loginUser.fulfilled, (state, action) => {
@@ -125,5 +131,5 @@ export const authSlice = createSlice({
 });
 
 const authReducer = authSlice.reducer;
-
+export const { logout } = authSlice.actions;
 export default authReducer;

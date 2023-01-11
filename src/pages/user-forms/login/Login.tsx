@@ -31,7 +31,11 @@ const Login = () => {
 
   useEffect(() => {
     if (authInfo.loggedIn && !authInfo.error) navigate('/');
-  });
+  }, [authInfo.loggedIn, navigate, authInfo.error]);
+
+  useEffect(() => {
+    if (!authInfo.loggedIn && authInfo.error) navigate('/login');
+  }, [authInfo.loggedIn, navigate, authInfo.error]);
 
   const {
     register,
@@ -51,9 +55,7 @@ const Login = () => {
         email: data.email,
         password: data.password,
       };
-      await dispatch(loginUser(credentials))
-        .unwrap()
-        .then(() => navigate('/profile'));
+      await dispatch(loginUser(credentials));
     } catch (e) {
       console.log(e);
     }
@@ -61,69 +63,73 @@ const Login = () => {
 
   return (
     <PageContainer>
-      <LoginContainer
-        maxWidth="xs"
-        sx={{
-          p: 4,
-          boxShadow: 6,
-        }}
-      >
-        <Box
+      {authInfo.loggedIn ? (
+        <h1>AYOS</h1>
+      ) : (
+        <LoginContainer
+          maxWidth="xs"
           sx={{
-            width: '100%',
-            display: 'flex',
-            justifyContent: 'center',
-            mb: 2,
+            p: 4,
+            boxShadow: 6,
           }}
         >
-          <Typography variant="h4">Login</Typography>
-        </Box>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-            <TextField
-              variant="outlined"
-              label="Email Address"
-              autoComplete="email"
-              {...register('email', { required: 'Required' })}
-              error={!!errors.email}
-              helperText={errors.email ? errors.email.message : null}
-              sx={{ mb: 2 }}
-              onChange={(e) => setEmail(e.target.value)}
-              type="email"
-              value={email}
-            />
-            <TextField
-              variant="outlined"
-              label="Password"
-              {...register('password', { required: 'Required' })}
-              error={!!errors.password}
-              helperText={errors.password ? errors.password.message : null}
-              sx={{ mb: 2 }}
-              onChange={(e) => setPassword(e.target.value)}
-              type="password"
-              value={password}
-            />
-            <Button variant="contained" type="submit">
-              Submit
-            </Button>
-          </Box>
           <Box
             sx={{
               width: '100%',
               display: 'flex',
-              flexDirection: 'column',
               justifyContent: 'center',
-              alignItems: 'center',
-              mt: 2,
+              mb: 2,
             }}
           >
-            <Typography variant="h6"> Don't have an account yet? </Typography>
-            <Button variant="text" onClick={() => navigate('/register')}>
-              Register
-            </Button>
+            <Typography variant="h4">Login</Typography>
           </Box>
-        </form>
-      </LoginContainer>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+              <TextField
+                variant="outlined"
+                label="Email Address"
+                autoComplete="email"
+                {...register('email', { required: 'Required' })}
+                error={!!errors.email}
+                helperText={errors.email ? errors.email.message : null}
+                sx={{ mb: 2 }}
+                onChange={(e) => setEmail(e.target.value)}
+                type="email"
+                value={email}
+              />
+              <TextField
+                variant="outlined"
+                label="Password"
+                {...register('password', { required: 'Required' })}
+                error={!!errors.password}
+                helperText={errors.password ? errors.password.message : null}
+                sx={{ mb: 2 }}
+                onChange={(e) => setPassword(e.target.value)}
+                type="password"
+                value={password}
+              />
+              <Button variant="contained" type="submit">
+                Submit
+              </Button>
+            </Box>
+            <Box
+              sx={{
+                width: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                mt: 2,
+              }}
+            >
+              <Typography variant="h6"> Don't have an account yet? </Typography>
+              <Button variant="text" onClick={() => navigate('/register')}>
+                Register
+              </Button>
+            </Box>
+          </form>
+        </LoginContainer>
+      )}
     </PageContainer>
   );
 };

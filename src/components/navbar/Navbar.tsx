@@ -56,6 +56,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const Navbar = () => {
   const { cartItems } = useAppSelector((state: RootState) => state.cartReducer);
+  const authInfo = useAppSelector((state) => state.authReducer);
 
   const getItemsCount = () => {
     return cartItems.reduce(
@@ -120,7 +121,7 @@ const Navbar = () => {
               aria-haspopup="true"
               color="inherit"
             >
-              <CartLink to="/login">
+              <CartLink to={authInfo.loggedIn ? '/profile' : '/login'}>
                 <AccountBoxOutlinedIcon />
               </CartLink>
             </IconButton>

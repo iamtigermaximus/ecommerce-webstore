@@ -18,7 +18,7 @@ export interface User {
   name: string;
   email: string;
   password: string;
-  avatar: FileList | string;
+  avatar: string;
 }
 export interface UserState {
   userList: [];
