@@ -4,7 +4,7 @@ import * as yup from 'yup';
 import { Box, Button, TextField, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../../hooks/reduxHook';
-import { registerUser } from '../../../redux/reducers/authSlice';
+import { registerUser } from '../../../redux/reducers/userSlice';
 import { PageContainer, RegisterContainer } from './Register.styles';
 
 interface IFormInputs {

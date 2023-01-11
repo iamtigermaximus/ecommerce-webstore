@@ -3,7 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { Box, Button, TextField, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { loginUser } from '../../../redux/reducers/authSlice';
+import { loginUser } from '../../../redux/reducers/userSlice';
 import { useAppDispatch } from '../../../hooks/reduxHook';
 import { useState } from 'react';
 import { LoginContainer, PageContainer } from './Login.styles';
