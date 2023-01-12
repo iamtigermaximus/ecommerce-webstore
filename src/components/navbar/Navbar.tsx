@@ -2,7 +2,6 @@ import { styled, alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import Badge from '@mui/material/Badge';
 import SearchIcon from '@mui/icons-material/Search';
@@ -18,7 +17,7 @@ import {
 } from './Navbar.styles';
 import { useAppSelector } from '../../hooks/reduxHook';
 import { RootState } from '../../redux/store';
-// import { searchByName } from '../../redux/reducers/productSlice';
+import Typography from '@mui/material/Typography';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
