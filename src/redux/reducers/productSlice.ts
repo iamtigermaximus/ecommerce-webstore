@@ -27,10 +27,10 @@ const productSlice = createSlice({
       state.sort((a, b) => (a.price < b.price ? -1 : 1));
     },
     alphabetical: (state) => {
-      state.sort((a, b) => (a.title > b.title ? -1 : 1));
+      state.sort((a, b) => b.title.localeCompare(a.title));
     },
     alphabetical2: (state) => {
-      state.sort((a, b) => (a.title < b.title ? -1 : 1));
+      state.sort((a, b) => a.title.localeCompare(b.title));
     },
     searchByName: (state, action) => {
       const filteredProducts = state.filter((product) =>
