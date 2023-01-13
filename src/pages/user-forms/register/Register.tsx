@@ -74,6 +74,7 @@ const Register = () => {
               error={!!errors.email}
               helperText={errors.email ? errors.email.message : null}
               sx={{ mb: 2 }}
+              type="email"
             />
             <TextField
               variant="outlined"
@@ -82,6 +83,7 @@ const Register = () => {
               error={!!errors.password}
               helperText={errors.password ? errors.password.message : null}
               sx={{ mb: 2 }}
+              type="password"
             />
             <label>Avatar</label>
             <TextField

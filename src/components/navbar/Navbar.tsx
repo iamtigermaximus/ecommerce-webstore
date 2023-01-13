@@ -18,6 +18,7 @@ import {
 import { useAppSelector } from '../../hooks/reduxHook';
 import { RootState } from '../../redux/store';
 import Typography from '@mui/material/Typography';
+import { Avatar } from '@mui/material';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -56,6 +57,19 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const Navbar = () => {
   const { cartItems } = useAppSelector((state: RootState) => state.cartReducer);
   const authInfo = useAppSelector((state) => state.authReducer);
+  const userInfo = useAppSelector((state) => state.authReducer);
+
+  const setUserImage = () => {
+    if (userInfo && userInfo.userInfo?.avatar) {
+      return (
+        <Avatar
+          alt=""
+          src={userInfo.userInfo.avatar}
+          sx={{ height: '25px', width: '25px', border: '50%' }}
+        />
+      );
+    }
+  };
 
   const getItemsCount = () => {
     return cartItems.reduce(
@@ -93,6 +107,8 @@ const Navbar = () => {
           <Box
             sx={{
               width: '150px',
+              display: 'flex',
+              flexDirection: 'row',
             }}
           >
             <IconButton
@@ -113,17 +129,29 @@ const Navbar = () => {
                 </CartLink>
               </Badge>
             </IconButton>
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-haspopup="true"
-              color="inherit"
-            >
-              <CartLink to={authInfo.loggedIn ? '/profile' : '/login'}>
-                <AccountBoxOutlinedIcon />
-              </CartLink>
-            </IconButton>
+            {authInfo.loggedIn ? (
+              <Box
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
+                <CartLink to="/profile"> {setUserImage()}</CartLink>
+              </Box>
+            ) : (
+              <IconButton
+                size="large"
+                edge="end"
+                aria-label="account of current user"
+                aria-haspopup="true"
+                color="inherit"
+              >
+                <CartLink to="/login">
+                  <AccountBoxOutlinedIcon />
+                </CartLink>
+              </IconButton>
+            )}
           </Box>
         </Toolbar>
       </NavigationBar>

@@ -1,4 +1,11 @@
-import { Avatar, Box, Button, Container, Typography } from '@mui/material';
+import {
+  Avatar,
+  Box,
+  Button,
+  Container,
+  TextField,
+  Typography,
+} from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook';
@@ -14,15 +21,13 @@ const Profile = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  console.log('USERINFO', userInfo);
-
   const setUserImage = () => {
     if (userInfo && userInfo.userInfo?.avatar) {
       return (
         <Avatar
           alt=""
           src={userInfo.userInfo.avatar}
-          sx={{ height: '20vh', width: '10vw', border: '50%' }}
+          sx={{ height: '100px', width: '100px', border: '50%' }}
         />
       );
     }
@@ -43,15 +48,48 @@ const Profile = () => {
           {authInfo.loggedIn ? (
             <Box>
               <Box>
-                <Typography variant="h6">User Information</Typography>
+                <Typography variant="h5">User Information</Typography>
               </Box>
               <Box>{setUserImage()}</Box>
-              <Box>
-                <Typography variant="h5">
-                  Name: {userInfo.userInfo?.name}
-                </Typography>
+              <Box
+                maxWidth="lg"
+                key={userInfo.userInfo?.id}
+                sx={{
+                  width: '500px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  mb: 2,
+                }}
+              >
+                <TextField
+                  variant="outlined"
+                  label={userInfo.userInfo?.name}
+                  sx={{ mb: 2 }}
+                  type="text"
+                  disabled
+                />
+                <TextField
+                  variant="outlined"
+                  label={userInfo.userInfo?.email}
+                  sx={{ mb: 2 }}
+                  type="password"
+                  disabled
+                />
+                <TextField
+                  variant="outlined"
+                  label={userInfo.userInfo?.password}
+                  sx={{ mb: 2 }}
+                  type="password"
+                  disabled
+                />
+                <Button variant="contained">Edit</Button>
               </Box>
-              <Button onClick={() => dispatch(reset(navigate('/')))}>
+              <Button
+                variant="contained"
+                color="warning"
+                onClick={() => dispatch(reset(navigate('/')))}
+              >
                 log out
               </Button>
             </Box>
