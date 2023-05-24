@@ -29,10 +29,10 @@
 - remove products from the cart
 - clear all products in the cart
 - register and login as a user
+- responsive to different screen size
 
 ## Limitations and Improvements:
 
-- not yet responsive to smaller screen
 - logged in profile and protected route still in progress
 - needs features to create and update products (only if log in as admin)
 
