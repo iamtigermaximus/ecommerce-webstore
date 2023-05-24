@@ -1,6 +1,6 @@
 # Front-end Project: eShop - eCommerce Webstore
 
-## [Project Demo](https://fs13-frontend-project.vercel.app/)
+## [Project Demo](https://ecommerce-webstore-ivory.vercel.app/)
 
 ![React](https://img.shields.io/badge/React-v.18-blue)
 ![Redux toolkit](https://img.shields.io/badge/Redux-v.1.9-purple)
