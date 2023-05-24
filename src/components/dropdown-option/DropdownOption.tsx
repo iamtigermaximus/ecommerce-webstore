@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Fade from '@mui/material/Fade';
@@ -10,6 +9,7 @@ import {
   alphabetical,
   alphabetical2,
 } from '../../redux/reducers/productSlice';
+import { DropdownOptionButton } from './DropdownOption.styles';
 
 export default function FadeMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -37,7 +37,7 @@ export default function FadeMenu() {
 
   return (
     <>
-      <Button
+      <DropdownOptionButton
         variant="contained"
         id="fade-button"
         aria-controls={open ? 'fade-menu' : undefined}
@@ -46,7 +46,7 @@ export default function FadeMenu() {
         onClick={handleClick}
       >
         sort products
-      </Button>
+      </DropdownOptionButton>
       <Menu
         id="fade-menu"
         MenuListProps={{

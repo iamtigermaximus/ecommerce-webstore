@@ -39,11 +39,7 @@ const NewArrivalsSection = () => {
               <CardImageContainer
                 onClick={() => navigate(`/category/${product.title}`)}
               >
-                <CardMedia
-                  component="img"
-                  height="200"
-                  image={product.images[0]}
-                />
+                <CardMedia component="img" height="200" image={product.images[0]} />
                 <Box
                   sx={{
                     position: 'absolute',

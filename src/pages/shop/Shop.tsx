@@ -31,6 +31,7 @@ const Shop = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
+  console.log('PLEASE', products);
   useEffect(() => {
     dispatch(fetchAllProducts());
   }, [dispatch]);
@@ -46,6 +47,15 @@ const Shop = () => {
         }}
       >
         <CategoryLists />
+      </Box>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'flexEnd',
+          alignItems: 'center',
+          margin: '0 20px 5px',
+        }}
+      >
         <DropdownOption />
       </Box>
 
