@@ -57,7 +57,7 @@ const Cart = () => {
                 <CartItemContainer key={item.id}>
                   <CartItem>
                     <CartItemDetails>
-                      <CartImage image={item.title} />
+                      <CartImage image={item.images[0]} />
                     </CartItemDetails>
 
                     <CartItemDetails>

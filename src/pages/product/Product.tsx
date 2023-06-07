@@ -14,14 +14,14 @@ import {
 const Product = () => {
   const products = useAppSelector((state) => state.productReducer);
   const dispatch = useAppDispatch();
-  const { name } = useParams();
+  const { title } = useParams();
   const navigate = useNavigate();
   return (
     <PageContainer>
       <Tab label="BACK" onClick={() => navigate(-1)} />
       <SingleProductContainer>
         {products
-          .filter((item) => item.title === name)
+          .filter((item) => item.title === title)
           .map((item) => (
             <ProductDetailsContainer key={item.id}>
               <ProductDetailsBox>
