@@ -30,6 +30,7 @@
 - clear all products in the cart
 - register and login as a user
 - responsive to different screen size
+- pagination- calculates the products length for all items and for each category
 
 ## Limitations and Improvements:
 
