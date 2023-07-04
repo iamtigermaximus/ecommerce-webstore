@@ -31,6 +31,7 @@
 - register and login as a user
 - responsive to different screen size
 - pagination- calculates the products length for all items and for each category
+- search feature
 
 ## Limitations and Improvements:
 
