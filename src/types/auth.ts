@@ -33,4 +33,5 @@ export interface IAuthState {
   userInfo: User | null;
   error: boolean;
   errorMsg: string;
+  isRegistered: boolean;
 }

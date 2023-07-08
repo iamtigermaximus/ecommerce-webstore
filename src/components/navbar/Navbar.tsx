@@ -61,8 +61,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const Navbar = () => {
   const { cartItems } = useAppSelector((state: RootState) => state.cartReducer);
-  const authInfo = useAppSelector((state) => state.authReducer);
-  const userInfo = useAppSelector((state) => state.authReducer);
+  const authInfo = useAppSelector((state) => state.auth);
+  const userInfo = useAppSelector((state) => state.auth);
   const [searchTerm, setSearchTerm] = useState('');
   const products = useAppSelector((state) => state.productReducer);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
@@ -187,7 +187,7 @@ const Navbar = () => {
                   alignItems: 'center',
                 }}
               >
-                <CartLink to="/profile"> {setUserImage()}</CartLink>
+                <CartLink to="/profile">{setUserImage()}</CartLink>
               </Box>
             ) : (
               <IconButton

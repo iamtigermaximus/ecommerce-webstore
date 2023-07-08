@@ -16,8 +16,8 @@ export const PageContainer = styled(Container)`
   height: 100vh;
 `;
 const Profile = () => {
-  const userInfo = useAppSelector((state) => state.authReducer);
-  const authInfo = useAppSelector((state) => state.authReducer);
+  const userInfo = useAppSelector((state) => state.auth);
+  const authInfo = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 

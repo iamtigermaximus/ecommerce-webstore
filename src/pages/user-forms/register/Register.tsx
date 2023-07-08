@@ -1,42 +1,39 @@
+import React from 'react';
 import { useForm } from 'react-hook-form';
+import { registerUser } from '../../../redux/reducers/authSlice';
+import { IUserRegister } from '../../../types/auth';
+import { useAppDispatch } from '../../../hooks/reduxHook';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { Box, Button, TextField, Typography } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '../../../hooks/reduxHook';
-import { registerUser } from '../../../redux/reducers/userSlice';
 import { PageContainer, RegisterContainer } from './Register.styles';
+import { useNavigate } from 'react-router-dom';
 
-interface IFormInputs {
-  name: string;
-  email: string;
-  password: string;
-  avatar: FileList | string;
-}
+const registerSchema = yup.object({
+  name: yup.string().required('Name is required'),
+  email: yup.string().email('Invalid email').required('Email is required'),
+  password: yup
+    .string()
+    .min(8, 'Password must be at least 8 characters')
+    .max(32, 'Password must not exceed 32 characters')
+    .required('Password is required'),
+});
 
-const schema = yup
-  .object({
-    name: yup.string().required(),
-    email: yup.string().email().required(),
-    password: yup.string().min(8).max(32).required(),
-    avatar: yup.mixed().required(),
-  })
-  .required();
-
-const Register = () => {
+const Register: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IFormInputs>({
-    resolver: yupResolver(schema),
+  } = useForm<IUserRegister>({
+    resolver: yupResolver(registerSchema),
   });
-  const onSubmit = (data: IFormInputs) => {
-    console.log(data);
+  const onSubmit = handleSubmit((data) => {
     dispatch(registerUser(data));
-  };
+    navigate('/login');
+  });
+
   return (
     <PageContainer>
       <RegisterContainer
@@ -56,7 +53,7 @@ const Register = () => {
         >
           <Typography variant="h4">Sign Up</Typography>
         </Box>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={onSubmit}>
           <Box sx={{ display: 'flex', flexDirection: 'column' }}>
             <TextField
               variant="outlined"
@@ -95,7 +92,7 @@ const Register = () => {
               sx={{ mb: 2 }}
             />
             <Button variant="contained" type="submit">
-              Submit
+              Register
             </Button>
           </Box>
           <Box
@@ -114,4 +111,5 @@ const Register = () => {
     </PageContainer>
   );
 };
+
 export default Register;
