@@ -8,3 +8,14 @@ export interface Product {
   category: Category;
   images: string[];
 }
+
+export interface ProductCardProps {
+  product: {
+    id: number;
+    title: string;
+    description: string;
+    price: number;
+    category: Category;
+    images: string[];
+  };
+}

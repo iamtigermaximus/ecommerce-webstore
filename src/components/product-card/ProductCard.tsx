@@ -1,22 +1,66 @@
+import { Box, CardMedia, Typography } from '@mui/material';
 import {
-  CardImage,
   ProdCard,
   ProductCardButton,
   ProductCardContent,
   ProductCardName,
   ProductCardPrice,
+  CardImageContainer,
 } from './ProductCard.styles';
+import { useAppDispatch } from '../../hooks/reduxHook';
+import { addToCart } from '../../redux/reducers/cartSlice';
+import { useNavigate } from 'react-router-dom';
+import { ProductCardProps } from '../../types/product';
 
-const ProductCard = () => {
+const ProductCard = ({ product }: ProductCardProps) => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
   return (
-    <ProdCard>
-      <CardImage image="https://img01.ztat.net/article/spp-media-p1/cfc43f5b35ca43e69e35bc6c89586550/86daded655134c0ba55d7cdcc2535bf2.jpg?imwidth=1800&filter=packshot" />
+    <ProdCard key={product.id}>
+      <CardImageContainer
+        onClick={() => navigate(`/category/${product.title}`)}
+      >
+        <CardMedia component="img" height="200" image={product.images[0]} />
+        <Box
+          sx={{
+            position: 'absolute',
+            color: 'white',
+            top: 3,
+            padding: '2px 5px',
+            background: '#32CD32',
+            display: 'flex',
+            justifyContent: 'center',
+            borderRadius: '50px',
+          }}
+        >
+          <Typography
+            sx={{
+              fontSize: '10px',
+              textTransform: 'uppercase',
+            }}
+          >
+            {product.category.name}
+          </Typography>
+        </Box>
+      </CardImageContainer>
+
       <ProductCardContent>
-        <ProductCardButton variant="outlined" color="inherit">
+        <ProductCardButton
+          variant="outlined"
+          color="inherit"
+          onClick={() => dispatch(addToCart(product))}
+        >
           ADD TO CART
         </ProductCardButton>
-        <ProductCardName>Product Name</ProductCardName>
-        <ProductCardPrice>$ 200</ProductCardPrice>
+        <ProductCardName
+          sx={{
+            textTransform: 'uppercase',
+          }}
+        >
+          {product.title}
+        </ProductCardName>
+        <ProductCardPrice>$ {product.price}</ProductCardPrice>
       </ProductCardContent>
     </ProdCard>
   );
