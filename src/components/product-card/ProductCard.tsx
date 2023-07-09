@@ -1,4 +1,4 @@
-import { Box, CardMedia, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import {
   ProdCard,
   ProductCardButton,
@@ -11,6 +11,8 @@ import { useAppDispatch } from '../../hooks/reduxHook';
 import { addToCart } from '../../redux/reducers/cartSlice';
 import { useNavigate } from 'react-router-dom';
 import { ProductCardProps } from '../../types/product';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const ProductCard = ({ product }: ProductCardProps) => {
   const dispatch = useAppDispatch();
@@ -21,7 +23,13 @@ const ProductCard = ({ product }: ProductCardProps) => {
       <CardImageContainer
         onClick={() => navigate(`/category/${product.title}`)}
       >
-        <CardMedia component="img" height="200" image={product.images[0]} />
+        {/* <CardMedia component="img" height="200" image={product.images[0]} /> */}
+        <LazyLoadImage
+          effect="blur"
+          src={product.images[0]}
+          alt={product.title}
+          height={200}
+        />
         <Box
           sx={{
             position: 'absolute',
