@@ -18,7 +18,13 @@ import {
   clearCart,
   decrementQuantity,
   addToCart,
+  loadCart,
 } from '../../redux/reducers/cartSlice';
+import { useEffect } from 'react';
+import {
+  loadCartFromLocalStorage,
+  saveCartToLocalStorage,
+} from '../../helpers/localStorage';
 
 const Cart = () => {
   const dispatch = useAppDispatch();
@@ -31,6 +37,19 @@ const Cart = () => {
     );
   };
 
+  useEffect(() => {
+    // Load cart items from local storage when the component mounts
+    const loadedCartItems = loadCartFromLocalStorage();
+    if (loadedCartItems.length > 0) {
+      // Dispatch an action to update the Redux store with the loaded cart items
+      dispatch(loadCart(loadedCartItems));
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    saveCartToLocalStorage(cartItems);
+  }, [cartItems]);
+
   return (
     <PageContainer>
       <Box
@@ -42,6 +61,7 @@ const Cart = () => {
         <Box
           sx={{
             width: '100%',
+            height: '100vh',
             display: 'flex',
             justifyContent: 'center',
             my: 4,
@@ -51,17 +71,25 @@ const Cart = () => {
         </Box>
       ) : (
         <Container>
-          <Box>
+          <Box
+            sx={{
+              width: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              my: 4,
+            }}
+          >
             {cartItems.map((item) => {
               return (
                 <CartItemContainer key={item.id}>
                   <CartItem>
                     <CartItemDetails>
-                      <CartImage image={item.images[0]} />
+                      <CartImage image={item.image} />
                     </CartItemDetails>
 
                     <CartItemDetails>
-                      <ProductCardName>{item.title}</ProductCardName>
+                      <ProductCardName>{item.name}</ProductCardName>
                       <ProductCardPrice>
                         ${item.price * item.itemQuantity}
                       </ProductCardPrice>

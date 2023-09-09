@@ -1,21 +1,28 @@
-import { Category } from './category';
+// import { Category } from './category';
 
 export interface Product {
   id: number;
-  title: string;
+  name: string;
   description: string;
   price: number;
-  category: Category;
-  images: string[];
+  categoryName: string;
+  image: string;
+}
+
+export interface SearchResultsProps {
+  filteredProducts: Product[];
+  searchTerm: string;
+  onItemClick: () => void;
+  showSearchResults: boolean;
 }
 
 export interface ProductCardProps {
   product: {
     id: number;
-    title: string;
-    description: string;
+    image: string;
+    categoryName: string;
+    name: string;
     price: number;
-    category: Category;
-    images: string[];
+    description: string;
   };
 }

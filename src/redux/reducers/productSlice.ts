@@ -1,12 +1,12 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
 import { Product } from '../../types/product';
+import axiosInstance from '../../common/axiosInstance';
 
 export const fetchAllProducts = createAsyncThunk(
-  'fetchAllProducts',
+  'fetchAllProducts ',
   async () => {
     try {
-      const res = await axios.get('https://api.escuelajs.co/api/v1/products');
+      const res = await axiosInstance.get('/Products');
       return res.data;
     } catch (error) {
       console.log(error);
@@ -27,14 +27,14 @@ const productSlice = createSlice({
       state.sort((a, b) => (a.price < b.price ? -1 : 1));
     },
     alphabetical: (state) => {
-      state.sort((a, b) => b.title.localeCompare(a.title));
+      state.sort((a, b) => b.name.localeCompare(a.name));
     },
     alphabetical2: (state) => {
-      state.sort((a, b) => a.title.localeCompare(b.title));
+      state.sort((a, b) => a.name.localeCompare(b.name));
     },
     searchByName: (state, action) => {
       const filteredProducts = state.filter((product) =>
-        product.title.toLowerCase().includes(action.payload.toLowerCase())
+        product.name.toLowerCase().includes(action.payload.toLowerCase())
       );
       return {
         ...state,

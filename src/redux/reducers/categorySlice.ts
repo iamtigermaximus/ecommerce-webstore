@@ -1,17 +1,15 @@
 import { Category } from './../../types/category';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { AxiosError } from 'axios';
 import axiosInstance from '../../common/axiosInstance';
 
 export const fetchAllCategories = createAsyncThunk(
   'fetchAllCategories',
   async () => {
     try {
-      const res = await axiosInstance.get('/categories');
+      const res = await axiosInstance.get('/Categories');
       return res.data;
-    } catch (e) {
-      const error = e as AxiosError;
-      return error;
+    } catch (error) {
+      console.log(error);
     }
   }
 );
@@ -20,11 +18,10 @@ export const fetchAByCategories = createAsyncThunk(
   'fetchByCategories',
   async (categoryID: number) => {
     try {
-      const res = await axiosInstance.get(`/categories=${categoryID}products/`);
+      const res = await axiosInstance.get(`/Categories=${categoryID}products/`);
       return res.data;
-    } catch (e) {
-      const error = e as AxiosError;
-      return error;
+    } catch (error) {
+      console.log(error);
     }
   }
 );

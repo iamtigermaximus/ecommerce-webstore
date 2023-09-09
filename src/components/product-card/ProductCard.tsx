@@ -13,43 +13,94 @@ import { useNavigate } from 'react-router-dom';
 import { ProductCardProps } from '../../types/product';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
+import {
+  addToFavorites,
+  removeFromFavorites,
+} from '../../redux/reducers/favoriteSlice';
+import { useState } from 'react';
 
 const ProductCard = ({ product }: ProductCardProps) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  const handleAddToFavorites = (event: React.MouseEvent<HTMLDivElement>) => {
+    event.stopPropagation();
+    if (isFavorite) {
+      dispatch(removeFromFavorites(product.id));
+    } else {
+      dispatch(addToFavorites(product));
+    }
+
+    setIsFavorite((prevIsFavorite) => !prevIsFavorite);
+  };
+
+  const handleImageClick = () => {
+    navigate(`/category/${product.name}`);
+  };
 
   return (
     <ProdCard key={product.id}>
-      <CardImageContainer
-        onClick={() => navigate(`/category/${product.title}`)}
-      >
-        {/* <CardMedia component="img" height="200" image={product.images[0]} /> */}
+      <CardImageContainer onClick={handleImageClick}>
+        {/* <CardMedia component="img" height="200" image={product.image} /> */}
         <LazyLoadImage
           effect="blur"
-          src={product.images[0]}
-          alt={product.title}
+          src={product.image}
+          alt={product.name}
           height={200}
         />
+
         <Box
           sx={{
             position: 'absolute',
-            color: 'white',
             top: 3,
-            padding: '2px 5px',
-            background: '#32CD32',
             display: 'flex',
-            justifyContent: 'center',
-            borderRadius: '50px',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            width: '100%',
+            zIndex: 2,
           }}
         >
           <Typography
             sx={{
-              fontSize: '10px',
+              fontSize: '8px',
               textTransform: 'uppercase',
+              color: 'white',
+              padding: '2px',
+              background: '#32CD32',
+              width: '100px',
+              height: '20px',
+
+              display: 'flex',
+              borderRadius: '10px',
+              justifyContent: 'center',
+              alignItems: 'center',
             }}
           >
-            {product.category.name}
+            {product.categoryName}
           </Typography>
+          <Box
+            onClick={handleAddToFavorites}
+            sx={{
+              fontSize: '8px',
+              padding: '2px',
+              height: '20px',
+              display: 'flex',
+              borderRadius: '10px',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            {isFavorite ? (
+              <FavoriteOutlinedIcon sx={{ color: 'red', cursor: 'pointer' }} />
+            ) : (
+              <FavoriteBorderOutlinedIcon
+                sx={{ color: 'black', cursor: 'pointer' }}
+              />
+            )}
+          </Box>
         </Box>
       </CardImageContainer>
 
@@ -66,7 +117,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
             textTransform: 'uppercase',
           }}
         >
-          {product.title}
+          {product.name}
         </ProductCardName>
         <ProductCardPrice>$ {product.price}</ProductCardPrice>
       </ProductCardContent>

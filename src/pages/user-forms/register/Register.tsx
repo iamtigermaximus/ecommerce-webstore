@@ -82,15 +82,6 @@ const Register: React.FC = () => {
               sx={{ mb: 2 }}
               type="password"
             />
-            <label>Avatar</label>
-            <TextField
-              variant="outlined"
-              type="file"
-              {...register('avatar', { required: 'Required' })}
-              error={!!errors.avatar}
-              helperText={errors.avatar ? errors.avatar.message : null}
-              sx={{ mb: 2 }}
-            />
             <Button variant="contained" type="submit">
               Register
             </Button>

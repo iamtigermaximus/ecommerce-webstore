@@ -1,14 +1,7 @@
 import React from 'react';
-import { Product } from '../../types/product';
+import { SearchResultsProps } from '../../types/product';
 import { useNavigate } from 'react-router-dom';
 import { Box } from '@mui/material';
-
-interface SearchResultsProps {
-  filteredProducts: Product[];
-  searchTerm: string;
-  onItemClick: () => void;
-  showSearchResults: boolean;
-}
 
 const SearchResults: React.FC<SearchResultsProps> = ({
   filteredProducts,
@@ -18,17 +11,17 @@ const SearchResults: React.FC<SearchResultsProps> = ({
 }) => {
   const navigate = useNavigate();
 
-  const handleClick = (productTitle: string) => {
-    navigate(`/product/${productTitle}`);
+  const handleClick = (productName: string) => {
+    navigate(`/product/${productName}`);
     onItemClick();
   };
 
   const startsWithResults = filteredProducts.filter((product) =>
-    product.title.toLowerCase().startsWith(searchTerm.toLowerCase())
+    product.name.toLowerCase().startsWith(searchTerm.toLowerCase())
   );
 
   const exactMatchResults = filteredProducts.filter(
-    (product) => product.title.toLowerCase() === searchTerm.toLowerCase()
+    (product) => product.name.toLowerCase() === searchTerm.toLowerCase()
   );
 
   const results = [...startsWithResults, ...exactMatchResults];
@@ -46,8 +39,8 @@ const SearchResults: React.FC<SearchResultsProps> = ({
     >
       {results.map((product) => (
         <div key={product.id}>
-          <div onClick={() => handleClick(product.title)}>
-            <Box sx={{ px: 1, mx: 2, border: 'none' }}>{product.title}</Box>
+          <div onClick={() => handleClick(product.name)}>
+            <Box sx={{ px: 1, mx: 2, border: 'none' }}>{product.name}</Box>
           </div>
         </div>
       ))}

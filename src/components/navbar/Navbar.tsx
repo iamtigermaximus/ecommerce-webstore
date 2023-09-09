@@ -15,13 +15,15 @@ import {
   BrandLink,
   CartLink,
 } from './Navbar.styles';
-import { useAppSelector } from '../../hooks/reduxHook';
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook';
 import { RootState } from '../../redux/store';
 import Typography from '@mui/material/Typography';
-import { Avatar } from '@mui/material';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { Product } from '../../types/product';
 import SearchResults from '../search/SearchResults';
+import Avatar from '@mui/material/Avatar';
+import { deepOrange } from '@mui/material/colors';
+import { addToCart } from '../../redux/reducers/cartSlice';
 
 const Search = styled('form')(({ theme }) => ({
   position: 'relative',
@@ -61,8 +63,15 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const Navbar = () => {
   const { cartItems } = useAppSelector((state: RootState) => state.cartReducer);
+  const { favoriteItems } = useAppSelector(
+    (state: RootState) => state.favoriteReducer
+  );
   const authInfo = useAppSelector((state) => state.auth);
-  const userInfo = useAppSelector((state) => state.auth);
+  const dispatch = useAppDispatch();
+  const [cartItemsCount, setCartItemsCount] = useState(0);
+  const loggedIn = useAppSelector((state) => state.auth.loggedIn);
+
+  //const userInfo = useAppSelector((state) => state.auth);
   const [searchTerm, setSearchTerm] = useState('');
   const products = useAppSelector((state) => state.productReducer);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
@@ -75,7 +84,7 @@ const Navbar = () => {
 
     // Perform filtering based on the search term
     const filteredProducts = products.filter((product: Product) => {
-      const title = product.title.toLowerCase();
+      const title = product.name.toLowerCase();
       const query = searchValue.toLowerCase();
       return title.startsWith(query) || title === query;
     });
@@ -88,7 +97,7 @@ const Navbar = () => {
     event.preventDefault();
     // Perform search operation based on the search term
     const filteredProducts = products.filter((product: Product) =>
-      product.title.toLowerCase().includes(searchTerm.toLowerCase())
+      product.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredProducts(filteredProducts);
     setSearchTerm('');
@@ -98,25 +107,24 @@ const Navbar = () => {
     setShowSearchResults(false); // Hide search results when an item is clicked
     setSearchTerm(''); //clear input field
   };
-
-  const setUserImage = () => {
-    if (userInfo && userInfo.userInfo?.avatar) {
-      return (
-        <Avatar
-          alt=""
-          src={userInfo.userInfo.avatar}
-          sx={{ height: '25px', width: '25px', border: '50%' }}
-        />
-      );
-    }
-  };
-
-  const getItemsCount = () => {
+  const getItemsCount = useCallback(() => {
     return cartItems.reduce(
       (accumulator, item) => accumulator + item.itemQuantity,
       0
     );
+  }, [cartItems]);
+
+  const getFavoriteItemsCount = () => {
+    return favoriteItems.length;
   };
+
+  useEffect(() => {
+    setCartItemsCount(getItemsCount());
+    if (authInfo.loggedIn && authInfo.userInfo) {
+      authInfo.userInfo.cart.forEach((item) => dispatch(addToCart(item)));
+    }
+  }, [authInfo.loggedIn, authInfo.userInfo, dispatch, getItemsCount]);
+
   return (
     <>
       <NavigationBar position="static">
@@ -166,19 +174,31 @@ const Navbar = () => {
               aria-label="show 4 new mails"
               color="inherit"
             >
-              <Badge badgeContent={'0'} color="error">
-                <CartLink to="/">
+              <Badge
+                badgeContent={getFavoriteItemsCount() || '0'}
+                color="error"
+              >
+                <CartLink to="/favorite">
                   <FavoriteBorderIcon />
                 </CartLink>
               </Badge>
             </IconButton>
             <IconButton size="large" color="inherit">
-              <Badge badgeContent={getItemsCount() || '0'} color="error">
-                <CartLink to="/cart">
-                  <ShoppingCartOutlinedIcon />
-                </CartLink>
-              </Badge>
+              {loggedIn ? (
+                <Badge badgeContent={getItemsCount() || '0'} color="error">
+                  <CartLink to="/cart">
+                    <ShoppingCartOutlinedIcon />
+                  </CartLink>
+                </Badge>
+              ) : (
+                <Badge badgeContent={cartItemsCount || '0'} color="error">
+                  <CartLink to="/cart">
+                    <ShoppingCartOutlinedIcon />
+                  </CartLink>
+                </Badge>
+              )}
             </IconButton>
+
             {authInfo.loggedIn ? (
               <Box
                 sx={{
@@ -187,7 +207,17 @@ const Navbar = () => {
                   alignItems: 'center',
                 }}
               >
-                <CartLink to="/profile">{setUserImage()}</CartLink>
+                <CartLink to="/profile">
+                  <Avatar
+                    sx={{
+                      bgcolor: deepOrange[400],
+                      width: 35,
+                      height: 35,
+                    }}
+                  >
+                    <h4>{authInfo.userInfo?.initials}</h4>
+                  </Avatar>
+                </CartLink>
               </Box>
             ) : (
               <IconButton

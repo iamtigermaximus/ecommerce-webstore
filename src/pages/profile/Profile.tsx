@@ -1,44 +1,35 @@
-import {
-  Avatar,
-  Box,
-  Button,
-  Container,
-  TextField,
-  Typography,
-} from '@mui/material';
+import { Box, Button, Container, TextField, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook';
-import { reset } from '../../redux/reducers/authSlice';
-import { LoginContainer } from '../user-forms/login/Login.styles';
+import { logout } from '../../redux/reducers/authSlice';
 
 export const PageContainer = styled(Container)`
-  height: 100vh;
+  height: 100%;
+`;
+
+export const UserInfoContainer = styled(Container)`
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 `;
 const Profile = () => {
-  const userInfo = useAppSelector((state) => state.auth);
   const authInfo = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const setUserImage = () => {
-    if (userInfo && userInfo.userInfo?.avatar) {
-      return (
-        <Avatar
-          alt=""
-          src={userInfo.userInfo.avatar}
-          sx={{ height: '100px', width: '100px', border: '50%' }}
-        />
-      );
-    }
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate('/');
   };
 
   return (
     <PageContainer>
-      <LoginContainer>
+      <UserInfoContainer>
         <Box
           sx={{
-            width: '100%',
+            width: '500px',
             display: 'flex',
             justifyContent: 'center',
             mb: 2,
@@ -47,57 +38,77 @@ const Profile = () => {
         >
           {authInfo.loggedIn ? (
             <Box>
-              <Box>
-                <Typography variant="h5">User Information</Typography>
-              </Box>
-              <Box>{setUserImage()}</Box>
               <Box
-                maxWidth="lg"
-                key={userInfo.userInfo?.id}
                 sx={{
-                  width: '500px',
+                  width: '100%',
                   display: 'flex',
                   flexDirection: 'column',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
+                <p>Welcome, you are logged in {authInfo.userInfo?.name}!</p>
+                <Box>
+                  <Typography variant="h5">User Information</Typography>
+                </Box>
+              </Box>
+              <Box
+                maxWidth="lg"
+                key={authInfo.userInfo?.id}
+                sx={{
+                  width: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  mb: 1,
+                  p: 1,
+                }}
+              >
+                <TextField
+                  id="outlined"
+                  label="NAME"
+                  sx={{ mb: 2 }}
+                  type="text"
+                  value={authInfo.userInfo?.name}
+                />
+                <TextField
+                  id="outlined"
+                  label="EMAIL"
+                  sx={{ mb: 2 }}
+                  type="email"
+                  value={authInfo.userInfo?.email}
+                />
+                <TextField
+                  id="outlined"
+                  label="PASSWORD"
+                  sx={{ mb: 2 }}
+                  type="password"
+                  value=""
+                />
+                <Button variant="contained">Edit</Button>
+              </Box>
+              <Box
+                sx={{
+                  width: '100%',
+                  display: 'flex',
                   justifyContent: 'center',
                   mb: 2,
                 }}
               >
-                <TextField
-                  variant="outlined"
-                  label={userInfo.userInfo?.name}
-                  sx={{ mb: 2 }}
-                  type="text"
-                  disabled
-                />
-                <TextField
-                  variant="outlined"
-                  label={userInfo.userInfo?.email}
-                  sx={{ mb: 2 }}
-                  type="password"
-                  disabled
-                />
-                <TextField
-                  variant="outlined"
-                  label={userInfo.userInfo?.password}
-                  sx={{ mb: 2 }}
-                  type="password"
-                  disabled
-                />
-                <Button variant="contained">Edit</Button>
+                <Button
+                  variant="contained"
+                  color="warning"
+                  onClick={handleLogout}
+                >
+                  log out
+                </Button>
               </Box>
-              <Button
-                variant="contained"
-                color="warning"
-                onClick={() => dispatch(reset(navigate('/')))}
-              >
-                log out
-              </Button>
             </Box>
           ) : (
             ''
           )}
         </Box>
-      </LoginContainer>
+      </UserInfoContainer>
     </PageContainer>
   );
 };

@@ -10,26 +10,37 @@ import {
   ProductDetailsContainer,
   SingleProductContainer,
 } from './Product.styles';
+import { useEffect, useState } from 'react';
 
 const Product = () => {
   const products = useAppSelector((state) => state.productReducer);
   const dispatch = useAppDispatch();
-  const { title } = useParams();
+  const { name } = useParams();
   const navigate = useNavigate();
+  const [buttonClicked, setButtonClicked] = useState(false); // Added state variable
+
+  const handleAddToCart = (item: any) => {
+    dispatch(addToCart(item));
+    setButtonClicked(true);
+  };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <PageContainer>
       <Tab label="BACK" onClick={() => navigate(-1)} />
       <SingleProductContainer>
         {products
-          .filter((item) => item.title === title)
+          .filter((item) => item.name === name)
           .map((item) => (
             <ProductDetailsContainer key={item.id}>
               <ProductDetailsBox>
-                <CardImage image={item.images[0]} />
+                <CardImage image={item.image} />
               </ProductDetailsBox>
               <ProductDetailsBox>
                 <DetailsBox>
-                  <Typography variant="h5">{item.title}</Typography>
+                  <Typography variant="h5">{item.name}</Typography>
                 </DetailsBox>
                 <DetailsBox>
                   <Typography variant="h6">${item.price}</Typography>
@@ -49,9 +60,14 @@ const Product = () => {
                 >
                   <Button
                     variant="contained"
-                    onClick={() => dispatch(addToCart(item))}
+                    onClick={() => handleAddToCart(item)} // Use handleAddToCart function
+                    sx={{
+                      backgroundColor: buttonClicked ? 'green' : 'blue',
+                    }}
                   >
-                    <Typography>ADD TO CART</Typography>
+                    <Typography>
+                      {buttonClicked ? 'ADDED TO CART' : 'ADD TO CART'}
+                    </Typography>
                   </Button>
                 </DetailsBox>
               </ProductDetailsBox>

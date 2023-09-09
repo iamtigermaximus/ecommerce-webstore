@@ -19,10 +19,10 @@ const Category = () => {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const categoryItems = products
-    .filter((product) => product.category.name === category)
+    .filter((product) => product.categoryName === category)
     .slice(indexOfFirstItem, indexOfLastItem);
   const totalPages = Math.ceil(
-    products.filter((product) => product.category.name === category).length /
+    products.filter((product) => product.categoryName === category).length /
       itemsPerPage
   );
   // Handle page change
