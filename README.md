@@ -32,6 +32,7 @@
 - responsive to different screen size
 - pagination- calculates the products length for all items and for each category
 - search feature
+- add, remove and clear favorite products
 
 ## Limitations and Improvements:
 
