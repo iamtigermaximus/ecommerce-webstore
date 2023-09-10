@@ -1,13 +1,28 @@
-// import { Category } from './category';
+//import { Category } from './category';
 
 export interface Product {
-  id: number;
+  _id: string;
   name: string;
-  description: string;
   price: number;
-  categoryName: string;
+  description: string;
   image: string;
+  category: {
+    _id: string;
+    name: string;
+  };
 }
+
+// export interface Product {
+//   _id: string;
+//   name: string;
+//   price: number;
+//   description: string;
+//   image: string;
+//   category: {
+//     _id: string;
+//     categoryName: string;
+//   };
+// }
 
 export interface SearchResultsProps {
   filteredProducts: Product[];
@@ -17,12 +32,25 @@ export interface SearchResultsProps {
 }
 
 export interface ProductCardProps {
-  product: {
-    id: number;
-    image: string;
-    categoryName: string;
+  _id: string;
+  name: string;
+  price: number;
+  description: string;
+  image: string;
+  category: {
+    _id: string;
     name: string;
-    price: number;
-    description: string;
   };
 }
+
+// export interface ProductCardProps {
+//   _id: string;
+//   name: string;
+//   price: number;
+//   description: string;
+//   image: string;
+//   category: {
+//     _id: string;
+//     categoryName: string;
+//   };
+// }

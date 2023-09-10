@@ -23,11 +23,19 @@ const MostPopularSection = () => {
       </SectionNameContainer>
       <ProductCardsContainer>
         {products.length > 0 &&
-          products
-            .slice(8, 14)
-            .map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
+          products.slice(8, 14).map((product) => (
+            <ProductCard
+              _id={product._id}
+              name={product.name}
+              price={product.price}
+              description={product.description}
+              image={product.image}
+              category={{
+                _id: product.category._id,
+                name: product.category.name,
+              }}
+            />
+          ))}
       </ProductCardsContainer>
     </SectionContainer>
   );

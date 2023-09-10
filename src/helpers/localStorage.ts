@@ -6,6 +6,7 @@ const FAVORITE_LOCAL_STORAGE_KEY = 'favoriteItems';
 
 export const saveCartToLocalStorage = (cartItems: CartItem[]) => {
   const cartProducts: ICartProducts[] = cartItems.map((item) => ({
+    id: item._id,
     ...item,
     cartQuantity: item.itemQuantity,
   }));
@@ -24,6 +25,7 @@ export const loadCartFromLocalStorage = (): ICartProducts[] => {
 
 export const saveFavoriteToLocalStorage = (favoriteItems: Product[]) => {
   const favoriteProducts: Product[] = favoriteItems.map((item) => ({
+    id: item._id,
     ...item,
   }));
   localStorage.setItem(

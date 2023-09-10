@@ -17,7 +17,7 @@ const Product = () => {
   const dispatch = useAppDispatch();
   const { name } = useParams();
   const navigate = useNavigate();
-  const [buttonClicked, setButtonClicked] = useState(false); // Added state variable
+  const [buttonClicked, setButtonClicked] = useState(false);
 
   const handleAddToCart = (item: any) => {
     dispatch(addToCart(item));
@@ -34,7 +34,7 @@ const Product = () => {
         {products
           .filter((item) => item.name === name)
           .map((item) => (
-            <ProductDetailsContainer key={item.id}>
+            <ProductDetailsContainer key={item._id}>
               <ProductDetailsBox>
                 <CardImage image={item.image} />
               </ProductDetailsBox>

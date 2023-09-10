@@ -15,16 +15,16 @@ const favoriteSlice = createSlice({
   reducers: {
     addToFavorites(state, action: PayloadAction<Product>) {
       const existingIndex = state.favoriteItems.findIndex(
-        (item) => item.id === action.payload.id
+        (item) => item._id === action.payload._id
       );
 
       if (existingIndex === -1) {
         state.favoriteItems.push(action.payload);
       }
     },
-    removeFromFavorites(state, action: PayloadAction<number>) {
+    removeFromFavorites(state, action: PayloadAction<string>) {
       state.favoriteItems = state.favoriteItems.filter(
-        (item) => item.id !== action.payload
+        (item) => item._id !== action.payload
       );
     },
     loadFavorite: (state, action: PayloadAction<Product[]>) => {

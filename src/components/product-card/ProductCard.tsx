@@ -21,15 +21,24 @@ import {
 } from '../../redux/reducers/favoriteSlice';
 import { useState } from 'react';
 
-const ProductCard = ({ product }: ProductCardProps) => {
+const ProductCard = ({
+  _id,
+  name,
+  price,
+  description,
+  image,
+  category,
+}: ProductCardProps) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [isFavorite, setIsFavorite] = useState(false);
 
+  const product = { _id, name, price, description, image, category };
+
   const handleAddToFavorites = (event: React.MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
     if (isFavorite) {
-      dispatch(removeFromFavorites(product.id));
+      dispatch(removeFromFavorites(_id));
     } else {
       dispatch(addToFavorites(product));
     }
@@ -38,19 +47,14 @@ const ProductCard = ({ product }: ProductCardProps) => {
   };
 
   const handleImageClick = () => {
-    navigate(`/category/${product.name}`);
+    navigate(`/category/${name}`);
   };
 
   return (
-    <ProdCard key={product.id}>
+    <ProdCard key={_id}>
       <CardImageContainer onClick={handleImageClick}>
         {/* <CardMedia component="img" height="200" image={product.image} /> */}
-        <LazyLoadImage
-          effect="blur"
-          src={product.image}
-          alt={product.name}
-          height={200}
-        />
+        <LazyLoadImage effect="blur" src={image} alt={name} height={200} />
 
         <Box
           sx={{
@@ -79,7 +83,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
               alignItems: 'center',
             }}
           >
-            {product.categoryName}
+            {category.name}
           </Typography>
           <Box
             onClick={handleAddToFavorites}
@@ -117,9 +121,9 @@ const ProductCard = ({ product }: ProductCardProps) => {
             textTransform: 'uppercase',
           }}
         >
-          {product.name}
+          {name}
         </ProductCardName>
-        <ProductCardPrice>$ {product.price}</ProductCardPrice>
+        <ProductCardPrice>$ {price}</ProductCardPrice>
       </ProductCardContent>
     </ProdCard>
   );

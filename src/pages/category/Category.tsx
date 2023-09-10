@@ -19,10 +19,10 @@ const Category = () => {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const categoryItems = products
-    .filter((product) => product.categoryName === category)
+    .filter((product) => product.category.name === category)
     .slice(indexOfFirstItem, indexOfLastItem);
   const totalPages = Math.ceil(
-    products.filter((product) => product.categoryName === category).length /
+    products.filter((product) => product.category.name === category).length /
       itemsPerPage
   );
   // Handle page change
@@ -63,7 +63,17 @@ const Category = () => {
       <CardsWrapper>
         {categoryItems.length > 0 &&
           categoryItems.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard
+              _id={product._id}
+              name={product.name}
+              price={product.price}
+              description={product.description}
+              image={product.image}
+              category={{
+                _id: product.category._id,
+                name: product.category.name,
+              }}
+            />
           ))}
       </CardsWrapper>
       <PaginationContainer>

@@ -62,7 +62,17 @@ const Shop = () => {
           <CardsWrapper>
             {currentProducts.length > 0 &&
               currentProducts.map((product) => (
-                <ProductCard key={product.id} product={product} />
+                <ProductCard
+                  _id={product._id}
+                  name={product.name}
+                  price={product.price}
+                  description={product.description}
+                  image={product.image}
+                  category={{
+                    _id: product.category._id,
+                    name: product.category.name,
+                  }}
+                />
               ))}
           </CardsWrapper>
         </>

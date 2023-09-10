@@ -19,7 +19,7 @@ const CategorySection = () => {
         categories.slice(0, 5).map((category) => (
           <CategoryListButton
             variant="contained"
-            key={category.id}
+            key={category._id}
             onClick={() => navigate(`${category.name}`)}
           >
             {category.name}

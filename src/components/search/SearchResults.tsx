@@ -38,7 +38,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({
       }}
     >
       {results.map((product) => (
-        <div key={product.id}>
+        <div key={product._id}>
           <div onClick={() => handleClick(product.name)}>
             <Box sx={{ px: 1, mx: 2, border: 'none' }}>{product.name}</Box>
           </div>
