@@ -45,7 +45,7 @@ export const registerUser = createAsyncThunk(
         .map((name) => name[0].toUpperCase())
         .join('');
 
-      const UserResponse = await axiosInstance.post('/Users', {
+      const UserResponse = await axiosInstance.post('/auth/register', {
         ...user,
         initials: initials,
       });
@@ -65,7 +65,7 @@ export const loginUser = createAsyncThunk<
   { rejectValue: { error: boolean; errorMsg: string } }
 >('auth/loginUser', async (credentials, { rejectWithValue }) => {
   try {
-    const response = await axiosInstance.post<any>('/Auths', credentials);
+    const response = await axiosInstance.post<any>('/auth/login', credentials);
     const { data, success, message } = response.data;
 
     if (success) {
