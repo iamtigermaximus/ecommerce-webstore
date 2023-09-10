@@ -32,17 +32,19 @@ const NewArrivalsSection = () => {
         <ProductCardsContainer>
           {products.length > 0 &&
             products.slice(1, 7).map((product) => (
-              <ProductCard
-                _id={product._id}
-                name={product.name}
-                price={product.price}
-                description={product.description}
-                image={product.image}
-                category={{
-                  _id: product.category._id,
-                  name: product.category.name,
-                }}
-              />
+              <div key={product._id}>
+                <ProductCard
+                  _id={product._id}
+                  name={product.name}
+                  price={product.price}
+                  description={product.description}
+                  image={product.image}
+                  category={{
+                    _id: product.category._id,
+                    name: product.category.name,
+                  }}
+                />
+              </div>
             ))}
         </ProductCardsContainer>
       )}
