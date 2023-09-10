@@ -15,7 +15,7 @@
 - Material UI
 - Redux
 
-- API endpoint : [https://fakeapi.platzi.com/](https://fakeapi.platzi.com/)
+- Backend : [eshop-backend](https://github.com/iamtigermaximus/eshop-backend.git)
 
 ## Features:
 
