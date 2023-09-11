@@ -1,7 +1,7 @@
 import { Product } from './product';
 
 export interface ICartProducts extends Product {
-  _id: string;
+  id: string;
   itemQuantity: number;
   cartQuantity: number;
 }

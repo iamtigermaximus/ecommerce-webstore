@@ -82,7 +82,7 @@ const Cart = () => {
           >
             {cartItems.map((item) => {
               return (
-                <CartItemContainer key={item._id}>
+                <CartItemContainer key={item.id}>
                   <CartItem>
                     <CartItemDetails>
                       <CartImage image={item.image} />
@@ -95,7 +95,7 @@ const Cart = () => {
                       </ProductCardPrice>
                       <Button
                         variant="contained"
-                        onClick={() => dispatch(removeItem(item._id))}
+                        onClick={() => dispatch(removeItem(item.id))}
                       >
                         remove
                       </Button>
