@@ -71,6 +71,8 @@ export const loginUser = createAsyncThunk<
     if (success) {
       const { token, userId, name, email, initials } = data;
 
+      localStorage.setItem('token', token);
+
       const user: User = {
         id: userId.toString(),
         name,
